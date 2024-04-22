@@ -86,41 +86,15 @@ public class FilePath {
     public static final String FOCUS_SITE_PAGE_DATA = PP_DATA_FILE_PATH + "FocusSitePage.properties";
     public static final String HTML_SITEMAP_PAGE_DATA = PP_DATA_FILE_PATH + "HtmlSitemapPage.properties";
 
-    // **********Admin portal**************
-    //Locator files
-    public static final String HOME_HEADER_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "HomeHeaderPage.yml";
-    public static final String ADMIN_LOGIN_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "AdminLoginPage.yml";
-    public static final String MANAGE_MACRO_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "ManageMacroPage.yml";
-    public static final String MANAGE_MASTER_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "ManageMasterPage.yml";
-    public static final String MANAGE_NEIGHBORHOODS_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "ManageNeighborhoodsPage.yml";
-    public static final String MANAGE_BUSINESS_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "ManageBusinessPage.yml";
-    public static final String MANAGE_BUSINESS_CANDIDATES_PAGE_LOCATORS = AP_OBJECT_REPO_FILE_PATH + "ManageBusinessCandidatesPage.yml";
-
-    //Test data files
-    public static final String HOME_HEADER_PAGE_DATA = AP_DATA_FILE_PATH + "HomeHeaderPage.properties";
-    public static final String MANAGE_MACRO_PAGE_DATA = AP_DATA_FILE_PATH + "ManageMacroPage.properties";
-    public static final String MANAGE_MASTER_PAGE_DATA = AP_DATA_FILE_PATH + "ManageMasterPage.properties";
-    public static final String MANAGE_NEIGHBORHOODS_PAGE_DATA = AP_DATA_FILE_PATH + "ManageNeighborhoodsPage.properties";
-    public static final String MANAGE_BUSINESS_PAGE_DATA = AP_DATA_FILE_PATH + "ManageBusinessPage.properties";
-    public static final String MANAGE_BUSINESS_CANDIDATES_PAGE_DATA = AP_DATA_FILE_PATH + "ManageBusinessCandidatesPage.properties";
-
-
-    // **********HLCMS portal**************
-    //Locator files
-    public static final String HLCMS_LOGIN_PAGE_LOCATORS = HP_OBJECT_REPO_FILE_PATH + "HlcmsLoginPage.yml";
-    public static final String HLCMS_HOME_PAGE_LOCATORS = HP_OBJECT_REPO_FILE_PATH + "HlcmsHomePage.yml";
-    public static final String HLCMS_CATEGORY_LOCATORS = HP_OBJECT_REPO_FILE_PATH + "HlcmsCategoryPage.yml";
-    public static final String HLCMS_CATEGORY_FAQS_LOCATORS = HP_OBJECT_REPO_FILE_PATH + "HlcmsCategoryFAQsPage.yml";
-    public static final String HLCMS_CATEGORY_POPULAR_KEYWORDS_LOCATORS = HP_OBJECT_REPO_FILE_PATH + "HlcmsCategoryPopularKeywords.yml";
-
-    //Test data files
-    public static final String HLCMS_HOME_PAGE_DATA = HP_DATA_FILE_PATH + "HlcmsHomePage.properties";
-    public static final String HLCMS_CATEGORY_PAGE_DATA = HP_DATA_FILE_PATH + "HlcmsCategoryPage.properties";
-    public static final String HLCMS_CATEGORY_FAQS_PAGE_DATA = HP_DATA_FILE_PATH + "HlcmsCategoryFAQsPage.properties";
-    public static final String HLCMS_CATEGORY_POPULAR_KEYWORDS_DATA = HP_DATA_FILE_PATH + "HlcmsCategoryPopularKeywords.properties";
 
 
 
+    //////////////////////////// REAL PATH FOR MY TEST FRAMEWORK ////////////////////////////
+    private static final String REAL_RESOURCES_PATH = System.getProperty("user.dir") + File.separator + "src"
+            + File.separator + "main" + File.separator + "resources" + File.separator;
+    public static final String REAL_DATA_FILE_PATH = REAL_RESOURCES_PATH + "data" + File.separator;
+
+    public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";
     public FilePath() {
 
     }

@@ -1,22 +1,16 @@
 package tests;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import common.constants.Browser;
@@ -39,25 +33,13 @@ public class BaseTest {
      */
     @Parameters({ "EnvType", "DriverType" })
     @BeforeSuite(alwaysRun = true)
-    public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) {
-        try {
-//            final String path = FilePath.FAILED_TEST_SCREENSHOT_DIR;
-//            final String path = FilePath.FAILED_TEST_SCREENSHOT_DIR;
-//            if (Files.exists(Paths.get(path))) {
-//                FileUtils.cleanDirectory(new File(path));
-//                FileUtils.deleteDirectory(new File(path));
-//            }
-//            PropertyConfigurator.configure(FilePath.LOG4J_PROPERTIES);
-//            logger = Logger.getLogger(BaseTest.class);
-            testEnvType = Environment.get(EnvType);
-            driverType = DriverType.get(testDriverType);
-            //logger.info("Suite running on environment: " + EnvType);
-            //logger.info("Suite running on driver type: " + testDriverType);
+    public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) throws IOException {
+        testEnvType = Environment.get(EnvType);
+        driverType = DriverType.get(testDriverType);
+        //logger.info("Suite running on environment: " + EnvType);
+        //logger.info("Suite running on driver type: " + testDriverType);
 
-            disableBrowserLocationTestCases = Arrays.asList(getLocator(applicationData, "tests.for.disabled.browser.location").split(","));
-        } catch (IOException e) {
-            //logger.error(e);
-        }
+        //disableBrowserLocationTestCases = Arrays.asList(getLocator(applicationData, "tests.for.disabled.browser.location").split(","));
     }
 
     /**

@@ -16,6 +16,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import tests.BaseTest;
+import utils.DataLoader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -75,8 +76,9 @@ public class WebDriverFactory {
             throw new RuntimeException("Browser name is null");
         driver.manage().window().maximize();
 
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(
-                //Integer.parseInt(getPropertyValue(FilePath.APPLICATION_DATA, "implicitWaitTime"))));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(
+                Integer.parseInt(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"implicitTimeOut"))
+                ));
 
         return driver;
     }
