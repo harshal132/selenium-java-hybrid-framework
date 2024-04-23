@@ -1,0 +1,7 @@
+implicitTimeOut: 3000
+
+waitTime:
+  small: 2000
+  medium: 5000
+  high: 8000
+
