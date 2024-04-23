@@ -5,8 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.manager.SeleniumManager;
 import org.testng.annotations.Test;
+import tests.BaseTest;
 
-public class SeleniumTestOne {
+public class SeleniumTestOne extends BaseTest {
     @Test
     public void testOne(){
         ChromeOptions options = new ChromeOptions();

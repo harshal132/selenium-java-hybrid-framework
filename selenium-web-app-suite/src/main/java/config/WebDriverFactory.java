@@ -122,11 +122,6 @@ public class WebDriverFactory {
 
     }
 
-    /**
-     * return firefox options
-     *
-     * @return firefoxOptions
-     */
     private static FirefoxOptions getFirefoxOptions() {
         //WebDriverManager.firefoxdriver().setup();
         FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -138,34 +133,16 @@ public class WebDriverFactory {
         return firefoxOptions;
     }
 
-    /**
-     * return edge options
-     *
-     * @return edgeOptions
-     */
     private static EdgeOptions getEdgeOptions() {
-        //WebDriverManager.edgedriver().setup();
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.addArguments("-headed");
         return edgeOptions;
     }
 
-    /**
-     * return safari options
-     *
-     * @return safariOptions
-     */
     private static SafariOptions getSafariOptions() {
-        //WebDriverManager.safaridriver().setup();
-        SafariOptions safariOptions = new SafariOptions();
-        return safariOptions;
+        return new SafariOptions();
     }
 
-    /**
-     * return chrome android options
-     *
-     * @return androidEmulatorChromeOptions
-     */
     private static ChromeOptions getAndroidEmulatorChromeOptions() {
         //WebDriverManager.chromedriver().setup();
         ChromeOptions androidEmulatorChromeOptions = new ChromeOptions();
@@ -187,11 +164,6 @@ public class WebDriverFactory {
         return androidEmulatorChromeOptions;
     }
 
-    /**
-     * return chrome iphone options
-     *
-     * @return iphoneEmulatorChromeOptions
-     */
     private static ChromeOptions getIphoneEmulatorChromeOptions() {
         //WebDriverManager.chromedriver().setup();
         HashMap<String, String> iphoneEmulation = new HashMap<String, String>();

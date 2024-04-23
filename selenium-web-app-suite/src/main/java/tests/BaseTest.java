@@ -29,30 +29,21 @@ public class BaseTest {
     public static boolean disableBrowserLocation=false;
     public static List<String> disableBrowserLocationTestCases = new ArrayList<String>();
 
-    /**
-     * Will be run before suite to clear screenshots folder
-     */
     @Parameters({ "EnvType", "DriverType" })
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) throws IOException {
         testEnvType = Environment.get(EnvType);
         driverType = DriverType.get(testDriverType);
-        //logger.info("Suite running on environment: " + EnvType);
-        //logger.info("Suite running on driver type: " + testDriverType);
-        //disableBrowserLocationTestCases = Arrays.asList(getLocator(applicationData, "tests.for.disabled.browser.location").split(","));
-        disableBrowserLocationTestCases = Arrays.asList(DataLoader.getAppData(applicationData, "tests.for.disabled.browser.location").split(","));
+        System.out.println("Suite running on environment: " + EnvType);
+        System.out.println("Suite running on driver type: " + testDriverType);
+        disableBrowserLocationTestCases = Arrays.asList(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases").split(","));
     }
 
-    /**
-     * Will be run before every test to initiate driver
-     *
-     * @throws Exception
-     */
     @Parameters({ "Browser" })
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method m, @Optional("chrome") String browser, ITestContext context) throws Exception {
         browserName = Browser.get(browser);
-        // logger.info("Test running on browser: " + browser);
+        System.out.println("Test running on browser: " + browser);
         if(isBrowserLocationDisabledForTestCase(m.getName()))
             disableBrowserLocation=true;
         else
@@ -60,34 +51,20 @@ public class BaseTest {
 
         WebDriver driver = WebDriverFactory.getWebDriver(driverType, browserName);
         setDriver(driver);
-        // logger.info("Before Test: " + m.getName() + " with Thread ID: " + Thread.currentThread().getId());
     }
 
-    /**
-     * set thread-safe driver
-     */
     public static void setDriver(WebDriver driver) {
         threadLocalDriver.set(driver);
     }
 
-    /**
-     * get thread-safe driver
-     */
     public static WebDriver getDriver() {
         return threadLocalDriver.get();
     }
 
-    /**
-     * remove thread-safe driver
-     */
     public static void removeDriver() {
         threadLocalDriver.remove();
     }
 
-    /**
-     * Will generate failed screenshots after every failed test Will close driver
-     * after every passed test
-     */
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         disableBrowserLocation=false;
@@ -95,7 +72,6 @@ public class BaseTest {
         if (result.isSuccess()) {
             if (getDriver() != null) {
                 getDriver().quit();
-                // logger.info("After Test: " + result.getName() + " with Thread ID: " + Thread.currentThread().getId());
                 removeDriver();
             }
         }
@@ -104,11 +80,11 @@ public class BaseTest {
     public static boolean isMobileWeb() {
         try {
             boolean flag;
-            flag = (browserName.isAndroidChrome()) || browserName.isIphoneChrome() ? true : false;
+            flag = browserName.isAndroidChrome() || browserName.isIphoneChrome();
             return flag;
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get mobile test browser status");
-            // logger.error(e.toString());
+            System.out.println("Exception reached: Could not get mobile test browser status");
+            System.out.println(e.toString());
             throw e;
         }
     }
@@ -116,11 +92,11 @@ public class BaseTest {
     public static boolean isQaTest() {
         try {
             boolean flag;
-            flag = (testEnvType.isQaEnv()) ? true : false;
+            flag = testEnvType.isQaEnv();
             return flag;
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get QA environment status");
-            // logger.error(e.toString());
+            System.out.println("Exception reached: Could not get QA environment status");
+            System.out.println(e.toString());
             throw e;
         }
     }
@@ -128,11 +104,11 @@ public class BaseTest {
     public static boolean isProdTest() {
         try {
             boolean flag;
-            flag = (testEnvType.isProdEnv()) ? true : false;
+            flag = testEnvType.isProdEnv();
             return flag;
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Prod environment status");
-            // logger.error(e.toString());
+            System.out.println("Exception reached: Could not get Prod environment status");
+            System.out.println(e.toString());
             throw e;
         }
     }
@@ -142,8 +118,8 @@ public class BaseTest {
             if(disableBrowserLocationTestCases.indexOf(testcaseName) != -1)
                 return true;
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Browser Location On/Off status");
-            // logger.error(e.toString());
+            System.out.println("Exception reached: Could not get Browser Location On/Off status");
+            System.out.println(e.toString());
             throw e;
         }
         return false;

@@ -30,7 +30,6 @@ public class DataLoader {
         try {
             inputStream = new FileInputStream(filePath);
             obj = yaml.load(inputStream);
-            System.out.println(obj);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
