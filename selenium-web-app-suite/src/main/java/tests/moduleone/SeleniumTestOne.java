@@ -13,7 +13,7 @@ public class SeleniumTestOne extends BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
 
-        System.out.println(SeleniumManager.getInstance().getDriverPath(options,true));
+        // System.out.println(SeleniumManager.getInstance().getDriverPath(options,true));
         WebDriver driver = new ChromeDriver(options);
 
 
