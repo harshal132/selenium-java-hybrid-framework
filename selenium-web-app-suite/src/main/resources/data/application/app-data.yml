@@ -5,3 +5,5 @@ waitTime:
   medium: 5000
   high: 8000
 
+disableBrowserLocationTestCases: validateCategoryRedirectionBrowserLocationOff,validatePopularNeighborhoodSectionBrowserLocationOff,validateNewBusinessSectionDistanceLocationOff,validateNearBySectionLocationOff,validateNoDistanceTimeLabelOnCardsWithoutLocationAccess
+

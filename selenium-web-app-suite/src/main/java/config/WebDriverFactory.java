@@ -83,12 +83,6 @@ public class WebDriverFactory {
         return driver;
     }
 
-    /**
-     * return remote driver instance
-     *
-     * @param capabilities
-     * @return webDriver
-     */
     private static WebDriver getRemoteDriverInstance(Capabilities capabilities) throws MalformedURLException {
 
         WebDriver driver = null;

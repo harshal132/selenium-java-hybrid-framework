@@ -18,6 +18,7 @@ import common.constants.DriverType;
 import common.constants.Environment;
 import common.constants.FilePath;
 import config.WebDriverFactory;
+import utils.DataLoader;
 
 public class BaseTest {
     protected final String applicationData = (FilePath.APPLICATION_DATA);
@@ -38,8 +39,8 @@ public class BaseTest {
         driverType = DriverType.get(testDriverType);
         //logger.info("Suite running on environment: " + EnvType);
         //logger.info("Suite running on driver type: " + testDriverType);
-
         //disableBrowserLocationTestCases = Arrays.asList(getLocator(applicationData, "tests.for.disabled.browser.location").split(","));
+        disableBrowserLocationTestCases = Arrays.asList(DataLoader.getAppData(applicationData, "tests.for.disabled.browser.location").split(","));
     }
 
     /**
