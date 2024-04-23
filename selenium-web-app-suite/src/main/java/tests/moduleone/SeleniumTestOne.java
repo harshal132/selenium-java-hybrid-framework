@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import tests.BaseTest;
 
 public class SeleniumTestOne extends BaseTest {
-    @Test
+    @Test(description = "Check Framework functions", groups = { "regression", "sanity" })
     public void testOne(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");

@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -21,7 +23,6 @@ import config.WebDriverFactory;
 import utils.DataLoader;
 
 public class BaseTest {
-    protected final String applicationData = (FilePath.APPLICATION_DATA);
     protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
     public static Environment testEnvType;
     public static Browser browserName;
@@ -36,7 +37,7 @@ public class BaseTest {
         driverType = DriverType.get(testDriverType);
         System.out.println("Suite running on environment: " + EnvType);
         System.out.println("Suite running on driver type: " + testDriverType);
-        disableBrowserLocationTestCases = Arrays.asList(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases").split(","));
+        disableBrowserLocationTestCases = Arrays.asList(Objects.requireNonNull(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases")).split(","));
     }
 
     @Parameters({ "Browser" })
@@ -44,6 +45,7 @@ public class BaseTest {
     public void setUp(Method m, @Optional("chrome") String browser, ITestContext context) throws Exception {
         browserName = Browser.get(browser);
         System.out.println("Test running on browser: " + browser);
+        System.out.println("Method name: " + m.getName()); // Prints name of the test
         if(isBrowserLocationDisabledForTestCase(m.getName()))
             disableBrowserLocation=true;
         else
