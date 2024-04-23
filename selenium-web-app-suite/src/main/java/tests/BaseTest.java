@@ -1,10 +1,10 @@
 package tests;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -21,22 +21,21 @@ import config.WebDriverFactory;
 import utils.DataLoader;
 
 public class BaseTest {
-    protected final String applicationData = (FilePath.APPLICATION_DATA);
-    protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
+    protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
     public static Environment testEnvType;
     public static Browser browserName;
     public static DriverType driverType;
     public static boolean disableBrowserLocation=false;
-    public static List<String> disableBrowserLocationTestCases = new ArrayList<String>();
+    public static List<String> disableBrowserLocationTestCases = new ArrayList<>();
 
     @Parameters({ "EnvType", "DriverType" })
     @BeforeSuite(alwaysRun = true)
-    public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) throws IOException {
+    public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) {
         testEnvType = Environment.get(EnvType);
         driverType = DriverType.get(testDriverType);
         System.out.println("Suite running on environment: " + EnvType);
         System.out.println("Suite running on driver type: " + testDriverType);
-        disableBrowserLocationTestCases = Arrays.asList(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases").split(","));
+        disableBrowserLocationTestCases = Arrays.asList(Objects.requireNonNull(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases")).split(","));
     }
 
     @Parameters({ "Browser" })
@@ -44,11 +43,8 @@ public class BaseTest {
     public void setUp(Method m, @Optional("chrome") String browser, ITestContext context) throws Exception {
         browserName = Browser.get(browser);
         System.out.println("Test running on browser: " + browser);
-        if(isBrowserLocationDisabledForTestCase(m.getName()))
-            disableBrowserLocation=true;
-        else
-            disableBrowserLocation=false;
-
+        System.out.println("Method name: " + m.getName()); // Prints name of the test
+        disableBrowserLocation= isBrowserLocationDisabledForTestCase(m.getName());
         WebDriver driver = WebDriverFactory.getWebDriver(driverType, browserName);
         setDriver(driver);
     }
@@ -115,7 +111,7 @@ public class BaseTest {
 
     public static boolean isBrowserLocationDisabledForTestCase(String testcaseName) {
         try {
-            if(disableBrowserLocationTestCases.indexOf(testcaseName) != -1)
+            if(disableBrowserLocationTestCases.contains(testcaseName))
                 return true;
         } catch (Exception e) {
             System.out.println("Exception reached: Could not get Browser Location On/Off status");
