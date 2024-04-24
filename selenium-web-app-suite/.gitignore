@@ -37,3 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/
+/src/main/java/practice/
+/src/main/resources/reports/

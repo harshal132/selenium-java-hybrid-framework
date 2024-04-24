@@ -95,6 +95,10 @@ public class FilePath {
     public static final String REAL_DATA_FILE_PATH = REAL_RESOURCES_PATH + "data" + File.separator;
 
     public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";
+
+    public static final String REAL_REPORTS_FILE_PATH = REAL_RESOURCES_PATH + "reports" + File.separator;
+
+    public static final String REAL_TEST_SCREENSHOT_DIR = REAL_REPORTS_FILE_PATH + "screenshots" + File.separator;
     public FilePath() {
 
     }

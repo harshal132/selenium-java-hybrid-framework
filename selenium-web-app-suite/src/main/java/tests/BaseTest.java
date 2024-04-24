@@ -1,25 +1,31 @@
 package tests;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import common.listeners.TestListener;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import common.constants.Browser;
 import common.constants.DriverType;
 import common.constants.Environment;
 import common.constants.FilePath;
 import config.WebDriverFactory;
+import org.testng.annotations.Optional;
 import utils.DataLoader;
+import utils.ExtentTestManager;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
     public static Environment testEnvType;
@@ -119,5 +125,21 @@ public class BaseTest {
             throw e;
         }
         return false;
+    }
+
+    public static void logTestStep(String description) {
+        try{
+            ExtentTestManager.getTest().log(Status.INFO,description, MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot()).build());
+        }catch(IOException e){
+            System.out.println("Failed to capture screenshot"+e.getMessage());
+        }
+    }
+
+    public static String takeScreenshot() throws IOException {
+        File screenshotFile = ((TakesScreenshot) BaseTest.getDriver()).getScreenshotAs(OutputType.FILE);
+        FileInputStream fileInputStream = new FileInputStream(screenshotFile);
+        byte[] bytes = new byte[(int) screenshotFile.length()];
+        fileInputStream.read(bytes);
+        return new String(Base64.getEncoder().encode((bytes)));
     }
 }
