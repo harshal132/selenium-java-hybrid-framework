@@ -23,7 +23,7 @@ public class TestListener extends BaseTest implements ITestListener {
     public void onTestStart(ITestResult result) {
         String testClassName = result.getTestClass().getRealClass().getSimpleName();
         ExtentTest test = ExtentTestManager
-                .startTest(String.format("%s - %s (%s)", testClassName, result.getName(), BaseTest.browserName));
+                .startTest(String.format("%s - %s ( %s )", testClassName, result.getName(), BaseTest.browserName));
         test.assignDevice(BaseTest.browserName.toString());
     }
 
