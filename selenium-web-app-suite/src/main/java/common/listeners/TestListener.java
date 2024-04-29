@@ -36,7 +36,7 @@ public class TestListener extends BaseTest implements ITestListener {
     public void onTestFailure(ITestResult result) {
         String failedScreenshotPath;
         WebDriver driver = BaseTest.getDriver();
-        if (driver != null && driver instanceof TakesScreenshot) {
+        if (driver instanceof TakesScreenshot) {
             try {
                 failedScreenshotPath = takeScreenShot(driver, result);
                 ExtentTestManager.getTest().fail("Failed At Screenshot: ",
