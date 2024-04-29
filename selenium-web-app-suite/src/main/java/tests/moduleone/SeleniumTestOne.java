@@ -1,13 +1,15 @@
 package tests.moduleone;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.manager.SeleniumManager;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import tests.BaseTest;
 
+import static utils.DataLoader.getAppData;
+
 public class SeleniumTestOne extends BaseTest {
+    @Ignore
     @Test(description = "Check Framework functions", groups = { "regression", "sanity" })
     public void testOne(){
         // System.out.println(SeleniumManager.getInstance().getDriverPath(options,true));
@@ -23,6 +25,23 @@ public class SeleniumTestOne extends BaseTest {
         driver.get("https://www.google.com");
         logTestStep("Web page opened with title - "+driver.getTitle());
         driver.quit();
+    }
+
+    @Test(description = "Check management of different tabs", groups = { "sanity" })
+    public void testThree() throws InterruptedException {
+        WebDriver driver = getDriver();
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        logTestStep("Web page opened with title - "+driver.getTitle());
+
+        driver.findElement(By.cssSelector("#openwindow")).click();
+        Thread.sleep(2000);
+        for(String s: driver.getWindowHandles()){
+            if(!s.equals(driver.getWindowHandle())){
+                driver.switchTo().window(s);
+                System.out.println(driver.getTitle());
+            }
+        }
+
     }
 
 //    /**
