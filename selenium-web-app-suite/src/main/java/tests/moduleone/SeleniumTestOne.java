@@ -2,6 +2,7 @@ package tests.moduleone;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import tests.BaseTest;
@@ -25,6 +26,17 @@ public class SeleniumTestOne extends BaseTest {
         driver.get("https://www.google.com");
         logTestStep("Web page opened with title - "+driver.getTitle());
         driver.quit();
+    }
+
+    @Test(description = "Get Screenshot of Particular element", groups = { "regression", "sanity" })
+    public void testFour(){
+        WebDriver driver = getDriver();
+        driver.get("https://www.google.com");
+
+        logTestStep("Web page opened with title - "+driver.getTitle());
+        logTestStep("Screenshot captured for particular element",By.cssSelector("svg.goxjub"));
+
+        //driver.quit();
     }
 
     @Test(description = "Check management of different tabs", groups = { "sanity" })

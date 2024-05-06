@@ -8,6 +8,7 @@ import java.util.*;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import common.listeners.TestListener;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -133,8 +134,24 @@ public class BaseTest {
         }
     }
 
+    public static void logTestStep(String description, By locator) {
+        try{
+            ExtentTestManager.getTest().log(Status.INFO,description, MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshotOfElement(locator)).build());
+        }catch(IOException e){
+            System.out.println("Failed to capture screenshot"+e.getMessage());
+        }
+    }
+
     public static String takeScreenshot() throws IOException {
         File screenshotFile = ((TakesScreenshot) BaseTest.getDriver()).getScreenshotAs(OutputType.FILE);
+        FileInputStream fileInputStream = new FileInputStream(screenshotFile);
+        byte[] bytes = new byte[(int) screenshotFile.length()];
+        fileInputStream.read(bytes);
+        return new String(Base64.getEncoder().encode((bytes)));
+    }
+
+    public static String takeScreenshotOfElement(By locator) throws IOException {
+        File screenshotFile = ((TakesScreenshot) BaseTest.getDriver().findElement(locator)).getScreenshotAs(OutputType.FILE);
         FileInputStream fileInputStream = new FileInputStream(screenshotFile);
         byte[] bytes = new byte[(int) screenshotFile.length()];
         fileInputStream.read(bytes);
