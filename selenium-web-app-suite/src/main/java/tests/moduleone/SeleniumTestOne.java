@@ -1,15 +1,17 @@
 package tests.moduleone;
 
+import common.constants.FilePath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+import pages.BasePage;
 import tests.BaseTest;
+import utils.DataLoader;
 
-import static utils.DataLoader.getAppData;
 
 public class SeleniumTestOne extends BaseTest {
+    String moduleOnePageOneLocator = FilePath.REAL_LOCATORS_MODULE_ONE_PAGE_ONE;
     @Ignore
     @Test(description = "Check Framework functions", groups = { "regression", "sanity" })
     public void testOne(){
@@ -17,7 +19,6 @@ public class SeleniumTestOne extends BaseTest {
         WebDriver driver = getDriver();
         driver.get("https://www.facebook.com");
         logTestStep("Web page opened with title - "+driver.getTitle());
-        driver.quit();
     }
 
     @Test(description = "Check Framework functions", groups = { "regression", "sanity" })
@@ -25,7 +26,6 @@ public class SeleniumTestOne extends BaseTest {
         WebDriver driver = getDriver();
         driver.get("https://www.google.com");
         logTestStep("Web page opened with title - "+driver.getTitle());
-        driver.quit();
     }
 
     @Test(description = "Get Screenshot of Particular element", groups = { "regression", "sanity" })
@@ -34,9 +34,11 @@ public class SeleniumTestOne extends BaseTest {
         driver.get("https://www.google.com");
 
         logTestStep("Web page opened with title - "+driver.getTitle());
-        logTestStep("Screenshot captured for particular element",By.cssSelector("svg.goxjub"));
-
-        //driver.quit();
+        if(BaseTest.isMobileWeb()){
+            logTestStep("Screenshot captured for particular element", DataLoader.getLocatorMobile(moduleOnePageOneLocator,"googleVoiceSearch"));
+        }else{
+            logTestStep("Screenshot captured for particular element", DataLoader.getLocator(moduleOnePageOneLocator,"googleVoiceSearch"));
+        }
     }
 
     @Test(description = "Check management of different tabs", groups = { "sanity" })

@@ -3,6 +3,8 @@ package utils;
 import common.constants.FilePath;
 import org.testng.annotations.DataProvider;
 import org.yaml.snakeyaml.Yaml;
+import tests.BaseTest;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -31,7 +33,14 @@ public class TestDataProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return (List<Map<String, Object>>) yamlData.get(testCaseName);
+        if(BaseTest.isProdTest()){
+            yamlData = (Map<String, Object>) yamlData.get(testCaseName);
+            return (List<Map<String, Object>>) yamlData.get("prod");
+        }
+        else{
+            yamlData = (Map<String, Object>) yamlData.get(testCaseName);
+            return (List<Map<String, Object>>) yamlData.get("qa");
+        }
     }
 
     public static Object[][] parseMapToArray(List<Map<String, Object>> interimResults) {

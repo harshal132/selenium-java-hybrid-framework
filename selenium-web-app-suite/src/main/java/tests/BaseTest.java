@@ -33,22 +33,24 @@ public class BaseTest {
     public static boolean disableBrowserLocation=false;
     public static List<String> disableBrowserLocationTestCases = new ArrayList<>();
 
-    @Parameters({ "EnvType", "DriverType" })
+    @Parameters({ "EnvType", "DriverType","Browser" })
     @BeforeSuite(alwaysRun = true)
-    public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) {
+    public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType, @Optional("chrome") String browser) {
         testEnvType = Environment.get(EnvType);
         driverType = DriverType.get(testDriverType);
+        browserName = Browser.get(browser);
+
+        System.out.println("Test running on browser: " + browser);
         System.out.println("Suite running on environment: " + EnvType);
         System.out.println("Suite running on driver type: " + testDriverType);
+
         disableBrowserLocationTestCases = Arrays.asList(Objects.requireNonNull(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases")).split(","));
     }
 
     @Parameters({ "Browser" })
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method m, @Optional("chrome") String browser, ITestContext context) throws Exception {
-        browserName = Browser.get(browser);
-        System.out.println("Test running on browser: " + browser);
-        System.out.println("Method name: " + m.getName()); // Prints name of the test
+        System.out.println("Method name: " + m.getName());
         disableBrowserLocation= isBrowserLocationDisabledForTestCase(m.getName());
         WebDriver driver = WebDriverFactory.getWebDriver(driverType, browserName);
         setDriver(driver);
@@ -147,6 +149,7 @@ public class BaseTest {
         FileInputStream fileInputStream = new FileInputStream(screenshotFile);
         byte[] bytes = new byte[(int) screenshotFile.length()];
         fileInputStream.read(bytes);
+        fileInputStream.close();
         return new String(Base64.getEncoder().encode((bytes)));
     }
 
@@ -155,6 +158,7 @@ public class BaseTest {
         FileInputStream fileInputStream = new FileInputStream(screenshotFile);
         byte[] bytes = new byte[(int) screenshotFile.length()];
         fileInputStream.read(bytes);
+        fileInputStream.close();
         return new String(Base64.getEncoder().encode((bytes)));
     }
 }

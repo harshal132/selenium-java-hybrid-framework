@@ -1,5 +1,11 @@
 checkTestDataOne:
+  qa:
+  - url: https://www-qa.hidubai.com/
+    expectedTitle: Business Directory in Dubai | Local Search, Shopping, Food, Beauty Salons and More | HiDubai
+  - url: https://www.google.com/
+    expectedTitle: Business Directory in Dubai | Local Search, Shopping, Food, Beauty Salons and More | HiDubai
+  prod:
   - url: https://www.hidubai.com/
     expectedTitle: Business Directory in Dubai | Local Search, Shopping, Food, Beauty Salons and More | HiDubai
-  - url: https://www-qa.hidubai.com/
+  - url: https://www.hidubai.com/
     expectedTitle: Business Directory in Dubai | Local Search, Shopping, Food, Beauty Salons and More | HiDubai

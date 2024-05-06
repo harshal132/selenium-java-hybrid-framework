@@ -1,0 +1,11 @@
+googleVoiceSearch:
+  # Production Environment
+  prod:
+    locatorType: css
+    value: svg.goxjub
+    valueMobile: svg.goxjub # If mobile web has different locator
+  # QA Environment
+  qa:
+    locatorType: css
+    value: svg.goxjub
+    valueMobile: svg.goxjub # If mobile web has different locator

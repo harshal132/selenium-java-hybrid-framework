@@ -12,11 +12,14 @@ import java.util.Map;
 
 public class DataManagerTestCheck extends BaseTest {
     WebDriver driver;
-    String testDataFilePath;
     @Test(dataProvider = "module1", dataProviderClass = TestDataProvider.class)
     public void checkTestDataOne(Map<String, Object> testData){
         driver = getDriver();
         driver.get(testData.get("url").toString());
+
+        System.out.println("Url: "+testData.get("url").toString());
+        System.out.println("Title: "+driver.getTitle());
+
         Assert.assertEquals(driver.getTitle(),testData.get("expectedTitle"));
     }
 
