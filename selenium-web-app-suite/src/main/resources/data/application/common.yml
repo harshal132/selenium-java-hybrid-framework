@@ -1,0 +1,15 @@
+userCredentials:
+  qa:
+    accountAdminUser:
+      userName: admin1
+      password: password
+    businessAdminUser:
+      userName: business-admin1
+      password: password
+  prod:
+    accountAdminUser:
+      userName: admin1
+      password: password
+    businessAdminUser:
+      userName: business-admin1
+      password: password

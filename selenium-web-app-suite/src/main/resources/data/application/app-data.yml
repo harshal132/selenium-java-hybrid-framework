@@ -10,5 +10,5 @@ testSuiteReportName: Test Suite Execution Report
 
 baseUrl:
   qa: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-  prod:
+  prod: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 
