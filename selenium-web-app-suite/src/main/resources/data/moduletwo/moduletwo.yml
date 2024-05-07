@@ -1,0 +1,7 @@
+performLoginWithValidCredentials:
+  qa:
+    - username: Admin
+      password: admin123
+  prod:
+    - username: Admin
+      password: admin123

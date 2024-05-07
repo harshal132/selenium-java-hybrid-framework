@@ -10,36 +10,12 @@
 <!--        <listener class-name="com.pindubai.automation.common.listener.TestListener" />-->
 <!--        <listener class-name="com.pindubai.automation.common.listener.AnnotationTransformer"/>-->
 <!--    </listeners>-->
-    <parameter name="EnvType" value="prod" />
+    <parameter name="EnvType" value="qa" />
     <parameter name="DriverType" value="local" />
     <parameter name="Browser" value="chrome" />
     <test name="Regression Tests - Chrome">
         <classes>
-            <class name="tests.moduleone.DataManagerTestCheck"></class>
+            <class name="tests.moduletwo.OrangeHRMLoginTest"></class>
         </classes>
-<!--        <classes>-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.HomePageTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.HeaderTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.BusinessPageTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.BusinessSettingsPageTests"/>-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.FooterTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.UserProfilePageTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.UserProfileSettingsPageTests"/>-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.SearchResultsPageTests" />-->
-<!--            <parameter name="Browser" value="chrome" />-->
-<!--        </classes>-->
     </test> <!-- Test -->
-    <test name="Regression Tests - android chrome">
-<!--        <classes>-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.HomePageTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.HeaderTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.BusinessPageTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.BusinessSettingsPageTests"/>-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.FooterTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.UserProfilePageTests" />-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.UserProfileSettingsPageTests"/>-->
-<!--            <class name="com.pindubai.automation.test.publicPortal.SearchResultsPageTests" />-->
-<!--            <parameter name="Browser" value="android_chrome" />-->
-<!--        </classes>-->
-    </test><!-- Test -->
 </suite> <!-- Suite -->

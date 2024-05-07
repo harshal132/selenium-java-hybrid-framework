@@ -41,16 +41,16 @@ public class BasePage {
     protected DataLoader yaml;
 
     public BasePage(WebDriver driver) {
+        System.out.println("Driver object: "+driver);
         this.driver = driver;
         this.yaml = new DataLoader();
     }
 
     public void loadUrl(boolean deleteCookiesFlag, String url) {
-
         try {
             if (deleteCookiesFlag) {
                 driver.manage().deleteAllCookies();
-                //// logger.debug("Loaded url by deleting cookies: " + url);
+                System.out.println("Loaded url by deleting cookies: " + url);
             }
             driver.get(url);
             waitForPageToLoad();
@@ -64,19 +64,18 @@ public class BasePage {
         try {
             driver.navigate().refresh();
             waitForPageToLoad();
-            //// logger.debug("Refreshed page ");
+            System.out.println("Refreshed page ");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not refresh current page");
             throw e;
         }
     }
 
-
     public void navigateBack() {
         try {
             driver.navigate().back();
             waitForPageToLoad();
-            //// logger.debug("Naviagted to back page ");
+            System.out.println("Naviagted to back page ");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not navigate to back page");
             throw e;
@@ -87,7 +86,7 @@ public class BasePage {
         try {
             driver.navigate().forward();;
             waitForPageToLoad();
-            // // logger.debug("Naviagted to forward page ");
+            System.out.println("Naviagted to forward page ");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not navigate to forward page");
             throw e;
@@ -99,7 +98,7 @@ public class BasePage {
         try {
             waitForPageToLoad();
             url = driver.getCurrentUrl().trim();
-            // // logger.debug("Got current page url: " + url);
+            System.out.println("Got current page url: " + url);
         } catch (Exception e) {
             System.out.println("Exception reached: Could not get current page url");
             throw e;
@@ -111,7 +110,7 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(locator);
-            // // logger.debug("WebElement found");
+            System.out.println("WebElement found");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not get Element");
             throw e;
@@ -123,9 +122,9 @@ public class BasePage {
         List<WebElement> elements = null;
         try {
             elements = driver.findElements(locator);
-            // // logger.debug("WebElements found");
+            System.out.println("WebElements found");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get elements", e);
+            System.out.println("Exception reached: Could not get elements"+ e);
             throw e;
         }
         return elements;
@@ -138,9 +137,9 @@ public class BasePage {
     protected void clearText(WebElement element) {
         try {
             element.clear();
-            // // logger.debug("WebElement text cleared");
+            System.out.println("WebElement text cleared");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not clear text", e);
+            System.out.println("Exception reached: Could not clear text"+ e);
             throw e;
         }
     }
@@ -156,9 +155,9 @@ public class BasePage {
     protected void enterKeybordKeys(WebElement element, CharSequence... keysToSend) {
         try {
             element.sendKeys(keysToSend);
-            // // logger.debug("Keys entered on element");
+            System.out.println("Keys entered on element");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not enter keys", e);
+            System.out.println("Exception reached: Could not enter keys"+ e);
             throw e;
         }
     }
@@ -170,9 +169,9 @@ public class BasePage {
     protected void enterTextWithoutClear(String text, WebElement element) {
         try {
             element.sendKeys(text);
-            // // logger.debug("Text entered on element: " + text);
+            System.out.println("Text entered on element: " + text);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not enter text", e);
+            System.out.println("Exception reached: Could not enter text"+ e);
             throw e;
         }
     }
@@ -181,9 +180,9 @@ public class BasePage {
         try {
             clearText(element);
             element.sendKeys(text);
-            // // logger.debug("Text entered on element: " + text);
+            System.out.println("Text entered on element: " + text);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not enter text", e);
+            System.out.println("Exception reached: Could not enter text"+ e);
             throw e;
         }
     }
@@ -803,7 +802,7 @@ public class BasePage {
                     .orElse("");
             driver.switchTo().window(parentWindow);
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not switch to parent window", e);
+            System.out.println("Exception reached: Could not switch to parent window"+ e);
             throw e;
         }
     }
@@ -817,7 +816,7 @@ public class BasePage {
             driver.close();
             driver.switchTo().window(parentWindow);
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not switch to parent window after closing child", e);
+            System.out.println("Exception reached: Could not switch to parent window after closing child"+ e);
             throw e;
         }
     }
@@ -826,7 +825,7 @@ public class BasePage {
         try {
             driver.switchTo().frame(getElement(locator));
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not switch to iframe", e);
+            System.out.println("Exception reached: Could not switch to iframe"+ e);
             throw e;
         }
     }
@@ -835,7 +834,7 @@ public class BasePage {
         try {
             driver.switchTo().defaultContent();
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not switch to default content", e);
+            System.out.println("Exception reached: Could not switch to default content"+ e);
             throw e;
         }
     }
@@ -848,7 +847,7 @@ public class BasePage {
             waitForPageToLoad();
             url = getCurrentPageUrl();
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get url from next tab", e);
+            System.out.println("Exception reached: Could not get url from next tab"+ e);
             throw e;
         }
         return url;
@@ -865,7 +864,7 @@ public class BasePage {
             request.connect();
             responseCode = request.getResponseCode();
         } catch (IOException e) {
-            // logger.error("Exception reached: Could not get url response", e);
+            System.out.println("Exception reached: Could not get url response"+ e);
         }
         return responseCode;
     }
@@ -874,7 +873,7 @@ public class BasePage {
         try {
             getElement(locator).sendKeys(Keys.RETURN);
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not hit enter key", e);
+            System.out.println("Exception reached: Could not hit enter key"+ e);
             throw e;
         }
     }
@@ -884,7 +883,7 @@ public class BasePage {
         try {
             list = Stream.of(stringToChange.split(delimeter, -1)).collect(Collectors.toList());
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not split string to list " + stringToChange + " with delimeter " + delimeter, e);
+            System.out.println("Exception reached: Could not split string to list " + stringToChange + " with delimeter " + delimeter+ e);
             throw e;
         }
         return list;
@@ -896,7 +895,7 @@ public class BasePage {
             for (String string : listToChange)
                 map.put(string.split(delimeter)[0], string.split(delimeter)[1]);
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not split list to map " + listToChange + " with delimeter " + delimeter, e);
+            System.out.println("Exception reached: Could not split list to map " + listToChange + " with delimeter " + delimeter+ e);
             throw e;
         }
         return map;
@@ -913,7 +912,7 @@ public class BasePage {
                 return false;
             return true;
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get element size", e);
+            System.out.println("Exception reached: Could not get element size"+ e);
             throw e;
         }
     }
@@ -923,7 +922,7 @@ public class BasePage {
             WebElement element = getElement(locator);
             return element.getCssValue(cssPropertyame);
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not get element css property", e);
+            System.out.println("Exception reached: Could not get element css property"+ e);
             throw e;
         }
     }
@@ -933,7 +932,7 @@ public class BasePage {
             Select selectElement = new Select(getElement(selectLocator));
             selectElement.selectByVisibleText(optionText);
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not select option by index", e);
+            System.out.println("Exception reached: Could not select option by index"+ e);
             throw e;
         }
     }
@@ -943,7 +942,7 @@ public class BasePage {
             Select selectElement = new Select(getElement(selectLocator));
             selectElement.selectByIndex(index);
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not select option by index", e);
+            System.out.println("Exception reached: Could not select option by index"+ e);
             throw e;
         }
     }
@@ -959,7 +958,7 @@ public class BasePage {
             updatedValue = updatedValue / Math.pow(10, decimalpoint);
 
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not truncate value upto decimal point as expected due to - ", e);
+            System.out.println("Exception reached: Could not truncate value upto decimal point as expected due to - "+ e);
         }
         return updatedValue;
     }
@@ -974,7 +973,7 @@ public class BasePage {
                 return matcher.group(1);
 
         } catch (Exception e) {
-            // logger.debug("Failed to get text matching the given pattern due to exception " + e.getMessage());
+            System.out.println("Failed to get text matching the given pattern due to exception " + e.getMessage());
         }
         return null;
     }
@@ -988,7 +987,7 @@ public class BasePage {
                 return true;
 
         } catch (Exception e) {
-            // logger.debug("Failed to validate whether the text is matching the given pattern or not, due to exception " + e.getMessage());
+            System.out.println("Failed to validate whether the text is matching the given pattern or not, due to exception " + e.getMessage());
         }
         return false;
     }
@@ -1038,11 +1037,11 @@ public class BasePage {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
 
-            // logger.info("Uploaded media with path : " + imagesData+fileName);
+            System.out.println("Uploaded media with path : " + imagesData+fileName);
             return true;
 
         } catch (Exception e) {
-            // logger.debug("Failed to upload media with path : " + imagesData+fileName + " due to exception - " + e.getMessage());
+            System.out.println("Failed to upload media with path : " + imagesData+fileName + " due to exception - " + e.getMessage());
             return false;
         }
     }
@@ -1052,7 +1051,7 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).above(baseLocator));
-            // logger.debug("WebElement found above");
+            System.out.println("WebElement found above");
         } catch (Exception e) {
             // logger.error("Exception reached: Could not get Element above using relative locator ", e);
         }
@@ -1063,7 +1062,7 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).below(baseLocator));
-            // logger.debug("WebElement found below");
+            System.out.println("WebElement found below");
         } catch (Exception e) {
             // logger.error("Exception reached: Could not get Element below using relative locator ", e);
         }
@@ -1074,7 +1073,7 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).toLeftOf(baseLocator));
-            // logger.debug("WebElement found to the left");
+            System.out.println("WebElement found to the left");
         } catch (Exception e) {
             // logger.error("Exception reached: Could not get Element to the left using relative locator ", e);
         }
@@ -1085,9 +1084,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).toRightOf(baseLocator));
-            // logger.debug("WebElement found to the right");
+            System.out.println("WebElement found to the right");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element to the right using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element to the right using relative locator "+ e);
         }
         return element;
     }
@@ -1096,9 +1095,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).below(baseLocator));
-            // logger.debug("WebElement found near to it");
+            System.out.println("WebElement found near to it");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element near to it using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element near to it using relative locator "+ e);
         }
         return element;
     }
@@ -1107,9 +1106,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).above(baseElement));
-            // logger.debug("WebElement found above");
+            System.out.println("WebElement found above");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element above using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element above using relative locator "+ e);
         }
         return element;
     }
@@ -1118,9 +1117,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).below(baseElement));
-            // // logger.debug("WebElement found below");
+            System.out.println("WebElement found below");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get Element below using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element below using relative locator "+ e);
         }
         return element;
     }
@@ -1130,9 +1129,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).toLeftOf(baseElement));
-            // // logger.debug("WebElement found to the left");
+            System.out.println("WebElement found to the left");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get Element to the left using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element to the left using relative locator "+e.getMessage());
         }
         return element;
     }
@@ -1141,9 +1140,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).toLeftOf(baseElement));
-            // // logger.debug("WebElement found to the right");
+            System.out.println("WebElement found to the right");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get Element to the right using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element to the right using relative locator "+ e);
         }
         return element;
     }
@@ -1152,9 +1151,9 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(with(relativeLocator).below(baseElement));
-            // // logger.debug("WebElement found near to it");
+            System.out.println("WebElement found near to it");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get Element near to it using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element near to it using relative locator "+ e);
         }
         return element;
     }
@@ -1164,19 +1163,17 @@ public class BasePage {
         try {
             ((LocationContext)driver).setLocation(new Location(latitude, longitude, 0));
         } catch(Exception e) {
-            // // logger.error("Exception reached: Could not set browser location to specific lat and long", e);
+            System.out.println("Exception reached: Could not set browser location to specific lat and long"+ e);
             throw e;
         }
     }
 
     public String getTitle() {
-        String title = "";
         try {
-            title = driver.getTitle();
-
+            return driver.getTitle();
         } catch (Exception e) {
             System.out.println("Exception reached: Could not get title by element");
+            return null;
         }
-        return title;
     }
 }

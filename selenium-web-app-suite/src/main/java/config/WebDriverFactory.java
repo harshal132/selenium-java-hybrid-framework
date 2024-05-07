@@ -23,6 +23,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class WebDriverFactory {
     //public static Logger logger = Logger.getLogger(WebDriverFactory.class);
@@ -76,10 +77,7 @@ public class WebDriverFactory {
             throw new RuntimeException("Browser name is null");
         driver.manage().window().maximize();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(
-                Integer.parseInt(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"implicitTimeOut"))
-                ));
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(Integer.parseInt(Objects.requireNonNull(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "implicitTimeOut")))));
         return driver;
     }
 

@@ -1,0 +1,34 @@
+userNameTextBox:
+  # Production Environment
+  prod:
+    locatorType: name
+    value: username
+    valueMobile: username # If mobile web has different locator
+  # QA Environment
+  qa:
+    locatorType: name
+    value: username
+    valueMobile: username # If mobile web has different locator
+
+passwordTextBox:
+  # Production Environment
+  prod:
+    locatorType: name
+    value: password
+    valueMobile: password # If mobile web has different locator
+  # QA Environment
+  qa:
+    locatorType: name
+    value: password
+    valueMobile: password # If mobile web has different locator
+
+loginButton:
+  prod:
+    locatorType: css
+    value: button.orangehrm-login-button
+    valueMobile: button.orangehrm-login-button # If mobile web has different locator
+  # QA Environment
+  qa:
+    locatorType: css
+    value: button.orangehrm-login-button
+    valueMobile: button.orangehrm-login-button # If mobile web has different locator

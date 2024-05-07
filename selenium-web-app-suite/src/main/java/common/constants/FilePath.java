@@ -22,6 +22,9 @@ public class FilePath {
     public static final String REAL_LOCATORS_MODULE_ONE = REAL_LOCATORS + "moduleone" + File.separator;
     public static final String REAL_LOCATORS_MODULE_ONE_PAGE_ONE = REAL_LOCATORS_MODULE_ONE + "moduleonepageone.yml";
 
+    public static final String REAL_LOCATORS_MODULE_TWO = REAL_LOCATORS + "moduletwo" + File.separator;
+
+    public static final String REAL_LOCATORS_MODULE_TWO_LOGIN_PAGE = REAL_LOCATORS_MODULE_TWO + "loginscreen.yml";
     // Data
     public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";
     public static final String TEST_DATA_MODULE_ONE = REAL_DATA_FILE_PATH + "moduleone" + File.separator + "moduleone.yml";

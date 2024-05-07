@@ -1,6 +1,7 @@
 package utils;
 
 import common.constants.FilePath;
+import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 import org.yaml.snakeyaml.Yaml;
 import tests.BaseTest;
@@ -14,26 +15,27 @@ import java.util.Map;
 public class TestDataProvider {
     String testDataFilePath;
     @DataProvider(name="module1")
-    public Object[][] getTestDataForModule1(Method method){
+    public Object[][] getTestDataForModule1(Method method, ITestContext context){
         testDataFilePath = FilePath.TEST_DATA_MODULE_ONE;
-        return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName()));
+        return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 
     @DataProvider(name="module2")
-    public Object[][] getTestDataForModule2(Method method){
+    public Object[][] getTestDataForModule2(Method method, ITestContext context){
         testDataFilePath = FilePath.TEST_DATA_MODULE_TWO;
-        return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName()));
+        return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 
-    private List<Map<String, Object>> getTestDataFromYml(String testDataFilePath, String testCaseName) {
+    private List<Map<String, Object>> getTestDataFromYml(String testDataFilePath, String testCaseName, ITestContext context) {
         Map<String, Object> yamlData = null;
+        String testEnvironment = context.getCurrentXmlTest().getParameter("EnvType");
         Yaml yaml = new Yaml();
         try (FileReader reader = new FileReader(testDataFilePath)) {
             yamlData = yaml.load(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(BaseTest.isProdTest()){
+        if(testEnvironment!=null && testEnvironment.equals("prod")){
             yamlData = (Map<String, Object>) yamlData.get(testCaseName);
             return (List<Map<String, Object>>) yamlData.get("prod");
         }
