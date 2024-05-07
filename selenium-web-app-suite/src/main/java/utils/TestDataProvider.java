@@ -4,8 +4,6 @@ import common.constants.FilePath;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 import org.yaml.snakeyaml.Yaml;
-import tests.BaseTest;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;

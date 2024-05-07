@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite thread-count="6" name="Suite" parallel="methods">
+<suite thread-count="6" name="Suite" parallel="classes">
 <!--    <groups>-->
 <!--        <run>-->
 <!--            <include name="regression" />-->
@@ -16,6 +16,7 @@
     <test name="Regression Tests - Chrome">
         <classes>
             <class name="tests.moduletwo.OrangeHRMLoginTest"></class>
+            <class name="tests.moduleone.SeleniumTestOne"></class>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
