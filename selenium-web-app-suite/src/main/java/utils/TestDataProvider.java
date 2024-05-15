@@ -12,15 +12,15 @@ import java.util.Map;
 
 public class TestDataProvider {
     String testDataFilePath;
-    @DataProvider(name="module1")
+    @DataProvider(name="accounts")
     public Object[][] getTestDataForModule1(Method method, ITestContext context){
-        testDataFilePath = FilePath.TEST_DATA_MODULE_ONE;
+        testDataFilePath = FilePath.ACCOUNT_TEST_DATA;
         return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 
-    @DataProvider(name="module2")
+    @DataProvider(name="categories")
     public Object[][] getTestDataForModule2(Method method, ITestContext context){
-        testDataFilePath = FilePath.TEST_DATA_MODULE_TWO;
+        testDataFilePath = FilePath.CATEGORIES_TEST_DATA;
         return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 

@@ -9,6 +9,6 @@ disableBrowserLocationTestCases: SeleniumTestTwo, SeleniumTestThree
 testSuiteReportName: Test Suite Execution Report
 
 baseUrl:
-  qa: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-  prod: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+  qa: https://www-qa.hidubai.com/
+  prod: https://www.hidubai.com/
 

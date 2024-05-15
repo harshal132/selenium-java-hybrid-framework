@@ -19,16 +19,14 @@ public class FilePath {
 
     // Locators
     public static final String REAL_LOCATORS = REAL_RESOURCES_PATH + "locators" + File.separator;
-    public static final String REAL_LOCATORS_MODULE_ONE = REAL_LOCATORS + "moduleone" + File.separator;
-    public static final String REAL_LOCATORS_MODULE_ONE_PAGE_ONE = REAL_LOCATORS_MODULE_ONE + "moduleonepageone.yml";
+    public static final String LOCATORS_ACCOUNTS = REAL_LOCATORS + "moduleone" + File.separator;
+    public static final String LOCATOR_ACCOUNTS_HOMEPAGE = LOCATORS_ACCOUNTS + "homepage.yml";
 
-    public static final String REAL_LOCATORS_MODULE_TWO = REAL_LOCATORS + "moduletwo" + File.separator;
-
-    public static final String REAL_LOCATORS_MODULE_TWO_LOGIN_PAGE = REAL_LOCATORS_MODULE_TWO + "loginscreen.yml";
     // Data
     public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";
-    public static final String TEST_DATA_MODULE_ONE = REAL_DATA_FILE_PATH + "moduleone" + File.separator + "moduleone.yml";
-    public static final String TEST_DATA_MODULE_TWO = REAL_DATA_FILE_PATH + "moduletwo" + File.separator + "moduletwo.yml";
+    public static final String REAL_COMMON_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "common.yml";
+    public static final String ACCOUNT_TEST_DATA = REAL_DATA_FILE_PATH + "accounts" + File.separator + "accounts.yml";
+    public static final String CATEGORIES_TEST_DATA = REAL_DATA_FILE_PATH + "categories" + File.separator + "categories.yml";
 
     public FilePath() {
 
