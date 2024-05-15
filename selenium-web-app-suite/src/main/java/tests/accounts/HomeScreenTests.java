@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.BasePage;
 import pages.accounts.HomeScreen;
+import pages.accounts.LoginScreen;
 import tests.BaseTest;
 
 public class HomeScreenTests extends BaseTest {
@@ -12,5 +13,11 @@ public class HomeScreenTests extends BaseTest {
         BasePage basePage = new BasePage(getDriver());
         HomeScreen homeScreen = new HomeScreen(getDriver());
         SoftAssert softAssert = new SoftAssert();
+        LoginScreen loginScreen = new LoginScreen(getDriver());
+
+        basePage.loadBaseUrl();
+        homeScreen.tapOnLoginLink();
+        loginScreen.closeLoginPopup();
+
     }
 }

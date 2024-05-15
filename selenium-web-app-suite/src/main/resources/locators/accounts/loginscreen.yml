@@ -1,0 +1,7 @@
+crossIcon:
+  qa:
+    locatorType: css
+    value: i.modal-close.icon-x
+  prod:
+    locatorType: css
+    value: i.modal-close.icon-x

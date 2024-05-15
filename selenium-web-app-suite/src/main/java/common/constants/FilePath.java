@@ -4,7 +4,6 @@ import java.io.File;
 
 public class FilePath {
 
-
     //////////////////////////// REAL PATH FOR MY TEST FRAMEWORK ////////////////////////////
 
 
@@ -19,8 +18,9 @@ public class FilePath {
 
     // Locators
     public static final String REAL_LOCATORS = REAL_RESOURCES_PATH + "locators" + File.separator;
-    public static final String LOCATORS_ACCOUNTS = REAL_LOCATORS + "moduleone" + File.separator;
-    public static final String LOCATOR_ACCOUNTS_HOMEPAGE = LOCATORS_ACCOUNTS + "homepage.yml";
+    public static final String LOCATORS_ACCOUNTS = REAL_LOCATORS + "accounts" + File.separator;
+    public static final String LOCATOR_ACCOUNTS_HOMEPAGE = LOCATORS_ACCOUNTS + "homescreen.yml";
+    public static final String LOCATOR_ACCOUNTS_LOGIN_POPUP = LOCATORS_ACCOUNTS + "loginscreen.yml";
 
     // Data
     public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";

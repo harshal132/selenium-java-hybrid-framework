@@ -1,0 +1,9 @@
+loginLink:
+  # PROD Environment
+  prod:
+    locatorType: linktext
+    value: Log In
+  # QA Environment
+  qa:
+    locatorType: linktext
+    value: Log In

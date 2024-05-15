@@ -34,6 +34,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import tests.BaseTest;
 import utils.DataLoader;
 
 public class BasePage {
@@ -56,6 +57,22 @@ public class BasePage {
             waitForPageToLoad();
         } catch (Exception e) {
             System.out.println("Exception reached: Could not load Url");
+            throw e;
+        }
+    }
+
+    public void loadBaseUrl(){
+        try {
+            if(BaseTest.isQaTest()){
+                driver.get(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.qa"));
+                waitForPageToLoad();
+            }else {
+                driver.get(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.prod"));
+                waitForPageToLoad();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception reached: Could not load Base Url");
             throw e;
         }
     }
@@ -110,7 +127,6 @@ public class BasePage {
         WebElement element = null;
         try {
             element = driver.findElement(locator);
-            System.out.println("WebElement found");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not get Element");
             throw e;
@@ -122,7 +138,6 @@ public class BasePage {
         List<WebElement> elements = null;
         try {
             elements = driver.findElements(locator);
-            System.out.println("WebElements found");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not get elements"+ e);
             throw e;
@@ -137,7 +152,6 @@ public class BasePage {
     protected void clearText(WebElement element) {
         try {
             element.clear();
-            System.out.println("WebElement text cleared");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not clear text"+ e);
             throw e;
@@ -155,7 +169,6 @@ public class BasePage {
     protected void enterKeybordKeys(WebElement element, CharSequence... keysToSend) {
         try {
             element.sendKeys(keysToSend);
-            System.out.println("Keys entered on element");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not enter keys"+ e);
             throw e;
