@@ -1,9 +1,12 @@
 package common.constants;
 
 public enum WaitTime {
+    VLOW(1000),
     LOW(2000),
     MEDIUM(5000),
-    HIGH(8000);
+    HIGH(8000),
+    VHIGH(10000),
+    VVHIGH(15000);
 
     private final int waitValue;
     private WaitTime(int value) {

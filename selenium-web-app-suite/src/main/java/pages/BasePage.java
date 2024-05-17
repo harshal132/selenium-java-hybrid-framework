@@ -42,7 +42,6 @@ public class BasePage {
     protected DataLoader yaml;
 
     public BasePage(WebDriver driver) {
-        System.out.println("Driver object: "+driver);
         this.driver = driver;
         this.yaml = new DataLoader();
     }

@@ -1,5 +1,6 @@
 package tests.accounts;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.BasePage;
@@ -14,10 +15,11 @@ public class HomeScreenTests extends BaseTest {
         HomeScreen homeScreen = new HomeScreen(getDriver());
         SoftAssert softAssert = new SoftAssert();
         LoginScreen loginScreen = new LoginScreen(getDriver());
-
+        
         basePage.loadBaseUrl();
         homeScreen.tapOnLoginLink();
         loginScreen.closeLoginPopup();
+
 
     }
 }
