@@ -11,22 +11,33 @@ public class FilePath {
     private static final String REAL_RESOURCES_PATH = System.getProperty("user.dir") + File.separator + "src"
             + File.separator + "main" + File.separator + "resources" + File.separator;
     // Directory
-    public static final String REAL_DATA_FILE_PATH = REAL_RESOURCES_PATH + "data" + File.separator;
-    public static final String REAL_REPORTS_FILE_PATH = REAL_RESOURCES_PATH + "reports" + File.separator;
-    public static final String REAL_TEST_SCREENSHOT_DIR = REAL_REPORTS_FILE_PATH + "screenshots" + File.separator;
-    public static final String IMAGES_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "images";
+    public static final String DATA_DIR = REAL_RESOURCES_PATH + "data" + File.separator;
+    public static final String REPORTS_DIR = REAL_RESOURCES_PATH + "reports" + File.separator;
+    public static final String TEST_SCREENSHOT_DIR = REPORTS_DIR + "screenshots" + File.separator;
+    public static final String IMAGES_DATA_DIR = DATA_DIR + "images";
+    public static final String LOCATORS_DIR = REAL_RESOURCES_PATH + "locators" + File.separator;
+
+    // Locator Sub directories
+    public static final String CUSTOMER_PORTAL_LOCATORS = LOCATORS_DIR + "customerportal" + File.separator;
+    public static final String ADMIN_PORTAL_LOCATORS = LOCATORS_DIR + "adminportal" + File.separator;
+    public static final String PUBLIC_PORTAL_LOCATORS = LOCATORS_DIR + "publicportal" + File.separator;
+
+    // Data Sub directories
+    public static final String CUSTOMER_PORTAL_TEST_DATA_DIR = DATA_DIR + "customerportal" + File.separator;
+    public static final String ADMIN_PORTAL_TEST_DATA_DIR = DATA_DIR + "adminportal" + File.separator;
+    public static final String PUBLIC_PORTAL_TEST_DATA_DIR = DATA_DIR + "publicportal" + File.separator;
+
+    // Add test data and locators files below as per defined modules
+
+    // Test data
+    public static final String APP_DATA_FILE_PATH = DATA_DIR + "application" + File.separator + "app-data.yml";
+    public static final String COMMON_TEST_DATA_FILE_PATH = DATA_DIR + "application" + File.separator + "common.yml";
+
+    public static final String customerPortalTestData = CUSTOMER_PORTAL_TEST_DATA_DIR + "testdata.yml";
+    public static final String adminPortalTestData = ADMIN_PORTAL_TEST_DATA_DIR + "testdata.yml";
+    public static final String publicPortalTestData = PUBLIC_PORTAL_TEST_DATA_DIR + "testdata.yml";
 
     // Locators
-    public static final String REAL_LOCATORS = REAL_RESOURCES_PATH + "locators" + File.separator;
-    public static final String LOCATORS_ACCOUNTS = REAL_LOCATORS + "accounts" + File.separator;
-    public static final String LOCATOR_ACCOUNTS_HOMEPAGE = LOCATORS_ACCOUNTS + "homescreen.yml";
-    public static final String LOCATOR_ACCOUNTS_LOGIN_POPUP = LOCATORS_ACCOUNTS + "loginscreen.yml";
-
-    // Data
-    public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";
-    public static final String REAL_COMMON_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "common.yml";
-    public static final String ACCOUNT_TEST_DATA = REAL_DATA_FILE_PATH + "accounts" + File.separator + "accounts.yml";
-    public static final String CATEGORIES_TEST_DATA = REAL_DATA_FILE_PATH + "categories" + File.separator + "categories.yml";
 
     public FilePath() {
 

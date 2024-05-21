@@ -15,8 +15,8 @@
     <parameter name="Browser" value="chrome" />
     <test name="Regression Tests - Chrome">
         <classes>
-            <class name="tests.moduletwo.OrangeHRMLoginTest"></class>
-            <class name="tests.moduleone.SeleniumTestOne"></class>
+<!--            <class name="tests.moduletwo.OrangeHRMLoginTest"></class>-->
+<!--            <class name="tests.moduleone.SeleniumTestOne"></class>-->
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

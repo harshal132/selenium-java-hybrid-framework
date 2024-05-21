@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import common.constants.FilePath;
+import common.constants.WaitTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -63,10 +64,10 @@ public class BasePage {
     public void loadBaseUrl(){
         try {
             if(BaseTest.isQaTest()){
-                driver.get(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.qa"));
+                driver.get(DataLoader.getAppData(FilePath.APP_DATA_FILE_PATH,"baseUrl.qa"));
                 waitForPageToLoad();
             }else {
-                driver.get(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.prod"));
+                driver.get(DataLoader.getAppData(FilePath.APP_DATA_FILE_PATH,"baseUrl.prod"));
                 waitForPageToLoad();
             }
 
@@ -700,16 +701,15 @@ public class BasePage {
         try {
             WebElement element = getElement(locator);
             jsExecuteScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
-            // logger.debug("Highlighted elemnt by javascript");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not highlight element by javascript: ", e);
+            System.out.println("Exception reached: Could not highlight element by javascript: "+ e.getMessage());
             throw e;
         }
     }
 
     protected void acceptAlertIfPresent() {
         try {
-            new WebDriverWait(driver, Duration.ofMillis(8000)).until(ExpectedConditions.alertIsPresent());
+            new WebDriverWait(driver, Duration.ofMillis(WaitTime.HIGH.getTimeInMillis())).until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert().accept();
         } catch (TimeoutException e) {
             // logger.warn("Timed out, alert not present", e);
@@ -1007,7 +1007,7 @@ public class BasePage {
     // ROBOT framework operations
 
     public boolean uploadMediaByRobot(String fileName) {
-        final String imagesData = FilePath.IMAGES_DATA_FILE_PATH;
+        final String imagesData = FilePath.IMAGES_DATA_DIR;
 
         try {
             //File Need to be imported
@@ -1065,7 +1065,7 @@ public class BasePage {
             element = driver.findElement(with(relativeLocator).above(baseLocator));
             System.out.println("WebElement found above");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element above using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element above using relative locator "+ e.getMessage());
         }
         return element;
     }
@@ -1076,7 +1076,7 @@ public class BasePage {
             element = driver.findElement(with(relativeLocator).below(baseLocator));
             System.out.println("WebElement found below");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element below using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element below using relative locator "+ e.getMessage());
         }
         return element;
     }
@@ -1087,7 +1087,7 @@ public class BasePage {
             element = driver.findElement(with(relativeLocator).toLeftOf(baseLocator));
             System.out.println("WebElement found to the left");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element to the left using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element to the left using relative locator "+ e.getMessage());
         }
         return element;
     }

@@ -23,8 +23,8 @@ public class ExtentManager {
     }
 
     public static ExtentReports createInstance() {
-        String fileName = getReportPath(FilePath.REAL_REPORTS_FILE_PATH);
-        String reportName = getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"testSuiteReportName");
+        String fileName = getReportPath(FilePath.REPORTS_DIR);
+        String reportName = getAppData(FilePath.APP_DATA_FILE_PATH,"testSuiteReportName");
         ExtentSparkReporter reporter = new ExtentSparkReporter(fileName);
         reporter.config().setTheme(Theme.DARK);
         reporter.config().setDocumentTitle(reportName);
@@ -44,7 +44,7 @@ public class ExtentManager {
         Date now = new Date();
         String format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH).format(now);
 
-        reportFileLocation = path + File.separator + format1 + File.separator + getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"testSuiteReportName");
+        reportFileLocation = path + File.separator + format1 + File.separator + getAppData(FilePath.APP_DATA_FILE_PATH,"testSuiteReportName");
         File reportsDirectory = new File(reportFileLocation);
         if (!reportsDirectory.exists()) {
             if (reportsDirectory.mkdir()) {
