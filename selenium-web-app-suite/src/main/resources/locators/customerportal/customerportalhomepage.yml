@@ -1,0 +1,9 @@
+adminTab:
+  qa:
+    locatorType: xpath
+    value: //a[@id='tab_Add_Employee']/parent::li
+
+addEmployeeFromMenu:
+  qa:
+    locatorType: id
+    value: Add_Employee

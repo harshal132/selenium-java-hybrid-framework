@@ -1,0 +1,71 @@
+addEmployeeForm:
+  qa:
+    locatorType: xpath
+    value: //form[@name='Add_Employee']
+
+firstName:
+  qa:
+    locatorType: id
+    value: firstname
+
+lastName:
+  qa:
+    locatorType: id
+    value: lastname
+
+personalEmail:
+  qa:
+    locatorType: id
+    value: zc-Personal_Email
+
+mobileNumber:
+  qa:
+    locatorType: id
+    value: zc-Mobile_Number
+
+photo:
+  qa:
+    locatorType: id
+    value: zc-Photo_FILE
+
+gender:
+  qa:
+    locatorType: name
+    value: Gender
+
+employeeId:
+  qa:
+    locatorType: id
+    value: zc-Employee_ID
+
+locationTextBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Location')]/a
+
+locationDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Location-switch-search')]//div[contains(@class,'result-label')]
+
+employeeTypeTextBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Employee_Type')]/a
+
+noMatchesFound:
+  qa:
+    locatorType: xpath
+    value: //li[contains(@class,'no-results')]
+
+#addNewButton:
+#  qa:
+#    locatorType: xpath
+#    value: //div[contains(@id,'addNew')]/i
+
+employeeTypeDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Employee_Type-switch-search')]//div[contains(@class,'result-label')]
+
+

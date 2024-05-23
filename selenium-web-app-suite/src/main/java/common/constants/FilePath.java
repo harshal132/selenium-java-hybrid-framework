@@ -14,7 +14,7 @@ public class FilePath {
     public static final String DATA_DIR = REAL_RESOURCES_PATH + "data" + File.separator;
     public static final String REPORTS_DIR = REAL_RESOURCES_PATH + "reports" + File.separator;
     public static final String TEST_SCREENSHOT_DIR = REPORTS_DIR + "screenshots" + File.separator;
-    public static final String IMAGES_DATA_DIR = DATA_DIR + "images";
+    public static final String IMAGES_DATA_DIR = DATA_DIR + "images"+ File.separator;
     public static final String LOCATORS_DIR = REAL_RESOURCES_PATH + "locators" + File.separator;
 
     // Locator Sub directories
@@ -38,7 +38,9 @@ public class FilePath {
     public static final String publicPortalTestData = PUBLIC_PORTAL_TEST_DATA_DIR + "testdata.yml";
 
     // Locators
-
+    public static final String CUSTOMER_LOGINPAGE_LOCATORS = CUSTOMER_PORTAL_LOCATORS + "customerportalloginpage.yml";
+    public static final String CUSTOMER_HOMEPAGE_LOCATORS = CUSTOMER_PORTAL_LOCATORS + "customerportalhomepage.yml";
+    public static final String CUSTOMER_ADD_EMPLOYEE_LOCATORS = CUSTOMER_PORTAL_LOCATORS + "addemployeepage.yml";
     public FilePath() {
 
     }

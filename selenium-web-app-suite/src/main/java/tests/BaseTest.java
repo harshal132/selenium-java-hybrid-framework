@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.*;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import common.constants.*;
+import common.listeners.SoftAssertListener;
 import common.listeners.TestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -15,17 +18,15 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import common.constants.Browser;
-import common.constants.DriverType;
-import common.constants.Environment;
-import common.constants.FilePath;
 import config.WebDriverFactory;
 import org.testng.annotations.Optional;
+import pages.BasePage;
 import utils.DataLoader;
 import utils.ExtentTestManager;
 
 @Listeners(TestListener.class)
 public class BaseTest {
+    public SoftAssertListener softassert;
     protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
     public static Environment testEnvType;
     public static Browser browserName;
@@ -36,6 +37,7 @@ public class BaseTest {
     @Parameters({ "EnvType", "DriverType"})
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(@Optional("qa") String EnvType, @Optional("local") String testDriverType) {
+        softassert = new SoftAssertListener();
         testEnvType = Environment.get(EnvType);
         driverType = DriverType.get(testDriverType);
         System.out.println("Suite running on environment: " + EnvType);
@@ -51,7 +53,9 @@ public class BaseTest {
         System.out.println("Method name: " + m.getName()); // Prints name of the test
         disableBrowserLocation= isBrowserLocationDisabledForTestCase(m.getName());
         WebDriver driver = WebDriverFactory.getWebDriver(driverType, browserName);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(WaitTime.VHIGH.getTimeInMillis()));
         setDriver(driver);
+        new BasePage(getDriver()).loadBaseUrl();
     }
 
     public static void setDriver(WebDriver driver) {
@@ -67,8 +71,13 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown(ITestResult result) {
+    public void tearDown(ITestResult result) throws IOException {
         disableBrowserLocation=false;
+        try{
+            softassert.assertAll();
+        }catch(AssertionError e){
+            logTestStep(e.getMessage());
+        }
 
         if (result.isSuccess()) {
             if (getDriver() != null) {
@@ -77,6 +86,15 @@ public class BaseTest {
             }
         }
     }
+
+//    @AfterSuite
+//    public void closeSetup() {
+//        try{
+//            softAssert.assertAll();
+//        }catch(AssertionError e) {
+//            logTestStep(e.getMessage());
+//        }
+//    }
 
     public static boolean isMobileWeb() {
         try {
@@ -126,12 +144,9 @@ public class BaseTest {
         return false;
     }
 
-    public static void logTestStep(String description) {
-        try{
-            ExtentTestManager.getTest().log(Status.INFO,description, MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot()).build());
-        }catch(IOException e){
-            System.out.println("Failed to capture screenshot"+e.getMessage());
-        }
+    public static void logTestStep(String description) throws IOException {
+        // ExtentTestManager.getTest().log(Status.INFO,description, MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot()).build());
+        ExtentTestManager.getTest().log(Status.INFO,description);
     }
 
     public static void logTestStep(String description, By locator) {

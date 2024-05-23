@@ -1,0 +1,5 @@
+loadCustomerPortal:
+  qa:
+    - pageTitle: Business Directory in Dubai | Local Search, Shopping, Food, Beauty Salons and More | HiDubai
+    - pageTitle: Business Directory in Dubai | Local Search , Shopping, Food, Beauty Salons and More | HiDubai
+  prod:

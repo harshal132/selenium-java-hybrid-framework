@@ -9,6 +9,8 @@ disableBrowserLocationTestCases: SeleniumTestTwo, SeleniumTestThree
 testSuiteReportName: Test Suite Execution Report
 
 baseUrl:
-  qa: https://www-qa.hidubai.com/
-  prod: https://www.hidubai.com/
+  qa: https://harshalchavanhidubai.zohocreatorportal.com
+  prod: https://harshalchavanhidubai.zohocreatorportal.com
+
+appHeading: Employee Management Checks
 

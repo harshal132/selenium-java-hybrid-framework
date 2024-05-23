@@ -24,7 +24,7 @@ public class TestDataProvider {
         return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 
-    @DataProvider(name="customerPortal")
+    @DataProvider(name="customerportal")
     public Object[][] getTestDataForCustomerPortal(Method method, ITestContext context){
         testDataFilePath = FilePath.customerPortalTestData;
         return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));

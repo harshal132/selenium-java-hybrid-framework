@@ -1,0 +1,24 @@
+signInFrame:
+  qa:
+    locatorType: name
+    value: zohoiam
+
+userEmailTextBox:
+  qa:
+    locatorType: id
+    value: login_id
+
+nextButton:
+  qa:
+    locatorType: id
+    value: nextbtn
+
+passwordTextBox:
+  qa:
+    locatorType: id
+    value: password
+
+employeeManagementHeading:
+  qa:
+    locatorType: xpath
+    value: //span[@class='zc-app-brand-appname']
