@@ -2,7 +2,6 @@ package tests.customerportal;
 
 import common.constants.FilePath;
 import common.constants.WaitTime;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.customerportal.AddEmployeePage;
 import pages.customerportal.CustomerLoginPage;
@@ -32,6 +31,7 @@ public class CustomerPortalTests extends BaseTest {
         customerPortalHomePage.tapOnAdminTab();
         customerPortalHomePage.tapOnAddEmployeeFromMenu();
 
+        // Basic information
         addEmployeePage.setFirstName("Harshal");
         addEmployeePage.setLastName("Chavan");
         addEmployeePage.setPersonalEmail("harshal@yopmail.com");
@@ -39,6 +39,26 @@ public class CustomerPortalTests extends BaseTest {
         addEmployeePage.setMobileNumber(556939352);
         addEmployeePage.setPhoto(FilePath.IMAGES_DATA_DIR+"test.jpg");
 
+        // Work information
+        addEmployeePage.setEmployeeId("189861");
+        addEmployeePage.setLocation("Delhi");
+        addEmployeePage.setEmployeeType("Full Time");
+        addEmployeePage.setDepartment("Management");
+        addEmployeePage.setDesignation("Software Tester");
+
+//        addEmployeePage.setEmployeeStatus("");
+//        addEmployeePage.setEmployeeLevel("");
+//        addEmployeePage.setCtc("");
+//        addEmployeePage.setDateOfJoining("");
+//        addEmployeePage.setSeatLocation("");
+//        addEmployeePage.setWorkExperience("");
+//        addEmployeePage.setIsReportingManager(false);
+
+        //Personal Information
+        addEmployeePage.setDateOfBirth("24-July-1998");
+        addEmployeePage.setMaritalStatus("Single");
+//        addEmployeePage.setPresentAddress();
+//        addEmployeePage.setBloodGroup();
         Thread.sleep(WaitTime.VHIGH.getTimeInMillis());
     }
 

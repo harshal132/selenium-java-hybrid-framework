@@ -73,15 +73,32 @@ public class DataLoader {
     }
 
     private static String getValueAfterReplacement(String locatorValue, String... replacement) {
-        String[] locatorSplitArray = locatorValue.split("}", 2);
-        String finalLocatorString;
-        if(replacement.length ==2) {
-            String locator1 = (locatorSplitArray[0].concat("}")).replaceFirst("\\$\\{.*\\}", replacement[0]);
-            String locator2 = locatorSplitArray[1].replaceFirst("\\$\\{.*\\}", replacement[1]);
-            finalLocatorString = locator1 + locator2;
+        String finalLocatorString = "";
+        String[] locatorsSplitArray;
+        if(locatorValue.contains("|")){
+            locatorsSplitArray = locatorValue.split("\\|");
+            for(String oneLocator: locatorsSplitArray){
+                System.out.println("One locator value:"+oneLocator);
+                if(oneLocator.equals("|")){
+                    continue;
+                }
+                for(int i=0;i<replacement.length;i++){
+                    oneLocator = oneLocator.replaceFirst("\\$\\{text\\}", replacement[i]);
+                }
+                if(finalLocatorString.length()==0){
+                    finalLocatorString = oneLocator;
+                }
+                else{
+                    finalLocatorString = finalLocatorString + " | "+ oneLocator;
+                }
+            }
+        }else{
+            System.out.println("Entered else block");
+            for(int i=0;i<replacement.length;i++){
+                locatorValue = locatorValue.replaceFirst("\\$\\{text\\}",replacement[i]);
+            }
+            return locatorValue;
         }
-        else
-            finalLocatorString = locatorValue.replaceFirst("\\$\\{.*\\}", replacement[0]);
         return finalLocatorString;
     }
 

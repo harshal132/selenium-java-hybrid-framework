@@ -1,3 +1,4 @@
+# Basic Information
 addEmployeeForm:
   qa:
     locatorType: xpath
@@ -33,6 +34,7 @@ gender:
     locatorType: name
     value: Gender
 
+# Work Information
 employeeId:
   qa:
     locatorType: id
@@ -48,24 +50,77 @@ locationDropDownOptions:
     locatorType: xpath
     value: //div[contains(@class,'Location-switch-search')]//div[contains(@class,'result-label')]
 
+departmentNameTextBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Department')]/a
+
+departmentDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Department-switch-search')]//div[contains(@class,'result-label')]
+
+designationTextBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Designation')]/a
+
+designationDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Designation-switch-search')]//div[contains(@class,'result-label')]
+
+noMatchesFound:
+  qa:
+    locatorType: xpath
+    value: //ul[contains(@class,'results')]//li[contains(@class,'no-results')]
+
+addNewButton:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@id,'drop')]//div[@id='addNew']
+
+addNewValueTextBoxPopup:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zcpopup')]//input[contains(@type,'text')]
+
+submitAddNewPopupForm:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zcpopup')]//input[contains(@name,'submit')]
+
+resetAddNewPopupForm:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zcpopup')]//input[contains(@name,'reset')]
+
 employeeTypeTextBox:
   qa:
     locatorType: xpath
     value: //div[contains(@class,'zc-Employee_Type')]/a
 
-noMatchesFound:
-  qa:
-    locatorType: xpath
-    value: //li[contains(@class,'no-results')]
-
-#addNewButton:
-#  qa:
-#    locatorType: xpath
-#    value: //div[contains(@id,'addNew')]/i
-
 employeeTypeDropDownOptions:
   qa:
     locatorType: xpath
     value: //div[contains(@class,'Employee_Type-switch-search')]//div[contains(@class,'result-label')]
+
+dateOfBirth:
+  qa:
+    locatorType: id
+    value: Official_Date_of_Birth
+
+maritalStatusTextBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Employee_Type')]/a
+
+maritalStatusDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Employee_Status-switch-search')]//div[contains(@class,'result-label')]
+
+
+
 
 

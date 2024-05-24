@@ -644,13 +644,36 @@ public class BasePage {
         }
     }
 
-    protected void jsScrollToElement(WebElement element) {
+    protected void jsScrollWithinElement(WebElement element) {
         try {
             jsExecuteScript("arguments[0].scrollIntoView();", element);
-            // // logger.debug("Scrolled to elemnt by javascript");
+            System.out.println("Performed scroll within element");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not scroll to element by javascript: ", e);
+            System.out.println("Exception reached: Could not scroll into element by javascript: "+ e.getMessage());
         }
+    }
+
+    public void jsVerticalScrollTillElementVisible(WebElement elementView, WebElement elementToFind){
+        if(isDisplayedIfElementOnDom(false, elementToFind)){
+            int count = 0;
+            do{
+                jsScrollWithinElement(elementView);
+                count++;
+                if(isDisplayedIfElementOnDom(true, elementToFind)){
+                    System.out.println("Element found after scroll");
+                    break;
+                }
+            }while(count<3);
+            if(count==3){
+                System.out.println("Element not found after scroll");
+            }
+        }else{
+            System.out.println("Element visible on screen");
+        }
+    }
+
+    public void jsVerticalScrollTillElementVisible(By elementView, By elementToFind){
+        jsVerticalScrollTillElementVisible(getElement(elementView),getElement(elementToFind));
     }
 
     /**
@@ -658,8 +681,8 @@ public class BasePage {
      *
      * @param locator
      */
-    protected void jsScrollToElement(By locator) {
-        jsScrollToElement(getElement(locator));
+    protected void jsScrollWithinElement(By locator) {
+        jsScrollWithinElement(getElement(locator));
     }
 
     /**
@@ -668,7 +691,6 @@ public class BasePage {
     public void jsScrollToTop() {
         try {
             jsExecuteScript("window.scrollTo(0, 0)");
-            // logger.debug("Scrolled to top by javascript");
         } catch (Exception e) {
             // logger.warn("Exception reached: Could not scroll to top", e);
         }
