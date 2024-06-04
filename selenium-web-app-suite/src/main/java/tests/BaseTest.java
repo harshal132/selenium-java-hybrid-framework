@@ -55,7 +55,6 @@ public class BaseTest {
         WebDriver driver = WebDriverFactory.getWebDriver(driverType, browserName);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(WaitTime.VHIGH.getTimeInMillis()));
         setDriver(driver);
-        new BasePage(getDriver()).loadBaseUrl();
     }
 
     public static void setDriver(WebDriver driver) {

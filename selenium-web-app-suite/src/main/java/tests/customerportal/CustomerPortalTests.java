@@ -3,6 +3,7 @@ package tests.customerportal;
 import common.constants.FilePath;
 import common.constants.WaitTime;
 import org.testng.annotations.Test;
+import pages.BasePage;
 import pages.customerportal.AddEmployeePage;
 import pages.customerportal.CustomerLoginPage;
 import pages.customerportal.CustomerPortalHomePage;
@@ -18,6 +19,7 @@ public class CustomerPortalTests extends BaseTest {
     final String appDataFile = FilePath.APP_DATA_FILE_PATH;
     @Test(description = "Verify employee management title")
     public void loadCustomerPortal(){
+        new BasePage(getDriver()).loadBaseUrl();
         CustomerLoginPage customerLoginPage = new CustomerLoginPage(getDriver());
         customerLoginPage.performLogin(DataLoader.getAppData(commonDataFile,"userCredentials.qa.zohoAdminUser.username"),DataLoader.getAppData(commonDataFile,"userCredentials.qa.zohoAdminUser.password"));
         customerLoginPage.waitForEmployeeManagementPageToLoad();
