@@ -1,7 +1,10 @@
 userCredentials:
   qa:
     zohoAdminUser:
-      username: testemail@yopmail.com
+#      username: testemail@yopmail.com
+#      password: Hidubai@145
+
+      username: harshalchavan132@gmail.com
       password: Hidubai@145
     zohoViewerUser:
       userName: business-admin1

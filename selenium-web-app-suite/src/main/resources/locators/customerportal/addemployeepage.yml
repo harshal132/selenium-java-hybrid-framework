@@ -19,6 +19,11 @@ personalEmail:
     locatorType: id
     value: zc-Personal_Email
 
+officialEmail:
+  qa:
+    locatorType: id
+    value: zc-Official_Email
+
 mobileNumber:
   qa:
     locatorType: id
@@ -110,15 +115,194 @@ dateOfBirth:
     locatorType: id
     value: Official_Date_of_Birth
 
+dateOfBirthCalendarIcon:
+  qa:
+    locatorType: id
+    value: dateButtonEl_Official_Date_of_Birth
+
 maritalStatusTextBox:
   qa:
     locatorType: xpath
-    value: //div[contains(@class,'zc-Employee_Type')]/a
+    value: //div[contains(@class,'zc-Marital_Status')]/a
 
 maritalStatusDropDownOptions:
   qa:
     locatorType: xpath
-    value: //div[contains(@class,'Employee_Status-switch-search')]//div[contains(@class,'result-label')]
+    value: //div[contains(@class,'Marital_Status-switch-search')]//div[contains(@class,'result-label')]
+
+presentAddressLine1:
+  qa:
+    locatorType: name
+    value: Present_Address.address_line_1
+
+presentAddressLine2:
+  qa:
+    locatorType: name
+    value: Present_Address.address_line_2
+
+presentAddressCity:
+  qa:
+    locatorType: name
+    value: Present_Address.district_city
+
+presentAddressState:
+  qa:
+    locatorType: name
+    value: Present_Address.state_province
+
+presentAddressPostalCode:
+  qa:
+    locatorType: name
+    value: Present_Address.postal_Code
+
+presentAddressCountry:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@id,'id_country')]/a
+
+presentAddressCountrySearchBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'select2-drop-active')]//input
+
+presentAddressCountryList:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'select2-with-searchbox')]//ul//li/div
+
+bloodGroupTextBox:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Blood_Group')]/a
+
+bloodGroupDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Blood_Group-switch-search')]//div[contains(@class,'result-label')]
+
+# Education Details
+addNewEducationDetails:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Education_Details-group')]//span[contains(@class,'add_value_link')]/a
+
+addNewEducationDetailsLine:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@id,'Education_Details_addNewLine')]//span[contains(@class,'add_value_link')]/a
+
+courseDetails:
+  qa:
+    locatorType: xpath
+    value: "//input[@name='Education_Details.t::row_${text}.Course']"
+
+instituteDetails:
+  qa:
+    locatorType: xpath
+    value: "//input[@name='Education_Details.t::row_${text}.Institute_Name']"
+
+marksScored:
+  qa:
+    locatorType: xpath
+    value: "//input[@name='Education_Details.t::row_${text}.Marks_Scored']"
+
+yearOfCompletion:
+  qa:
+    locatorType: xpath
+    value: "//input[@name='Education_Details.t::row_${text}.Year_of_Completion']"
+
+# Work Experience
+workExperienceScrollView:
+  qa:
+    locatorType: name
+    value: Work_Experience1
+
+addNewWorkExperience:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Work_Experience1')]//span[contains(@class,'add_value_link')]/a
+
+addNewWorkExperienceRow:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@id,'Work_Experience1_addNewLine')]//span[contains(@class,'add_value_link')]/a
+
+previousCompanyName:
+  qa:
+    locatorType: xpath
+    value: "//div[@rowno='t::row_${text}']//input[@id='zc-Work_Experience1-Previous_Company_Name']"
+
+jobTitle:
+  qa:
+    locatorType: xpath
+    value: "//div[@rowno='t::row_${text}']//input[@id='zc-Work_Experience1-Job_Title']"
+
+fromDate:
+  qa:
+    locatorType: xpath
+    value: "//div[@rowno='t::row_${text}']//input[contains(@id,'From')]"
+
+toDate:
+  qa:
+    locatorType: xpath
+    value: "//div[@rowno='t::row_${text}']//input[contains(@id,'To')]"
+
+jobDescription:
+  qa:
+    locatorType: xpath
+    value: "//div[@rowno='t::row_${text}']//input[@id='zc-Work_Experience1-Job_Description']"
+
+# Dependent details
+addNewDependantButton:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'zc-Dependents-group')]//span[contains(@class,'add_value_link')]/a
+
+addNewDependantRow:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@id,'Dependents_addNewLine')]//span[contains(@class,'add_value_link')]/a
+
+dependantFirstName:
+  qa:
+    locatorType: xpath
+    value: //input[contains(@name,'Dependents.t::row_${text}.Name.first_name')]
+
+dependantLastName:
+  qa:
+    locatorType: xpath
+    value: //input[contains(@name,'Dependents.t::row_${text}.Name.last_name')]
+
+genderDropdown:
+  qa:
+    locatorType: xpath
+    value: //div[@rowno='t::row_${text}']//div[contains(@class,'zc-Dependents-Gender')]/a
+
+genderDropDownOptions:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Gender-switch-search')]//div[contains(@class,'result-label')]
+
+relationshipDropdown:
+  qa:
+    locatorType: xpath
+    value: //div[@rowno='t::row_${text}']//div[contains(@class,'zc-Dependents-Relationship')]/a
+
+relationshipDropdownOption:
+  qa:
+    locatorType: xpath
+    value: //div[contains(@class,'Relationship-switch-search')]//div[contains(@class,'result-label')]
+
+dependantDateOfBirth:
+  qa:
+    locatorType: xpath
+    value: //input[contains(@name,'Dependents.t::row_${text}.Date_of_Birth')]
+
+submitButton:
+  qa:
+    locatorType: name
+    value: submit
+
 
 
 

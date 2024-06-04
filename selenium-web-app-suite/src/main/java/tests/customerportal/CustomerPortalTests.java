@@ -8,6 +8,10 @@ import pages.customerportal.CustomerLoginPage;
 import pages.customerportal.CustomerPortalHomePage;
 import tests.BaseTest;
 import utils.DataLoader;
+import utils.TestDataProvider;
+
+import java.util.List;
+import java.util.Map;
 
 public class CustomerPortalTests extends BaseTest {
     final String commonDataFile = FilePath.COMMON_TEST_DATA_FILE_PATH;
@@ -20,8 +24,8 @@ public class CustomerPortalTests extends BaseTest {
         softassert.assertEquals(DataLoader.getAppData(appDataFile,"appHeading"), customerLoginPage.getWebAppHeading(), "Verified web app heading");
     }
 
-    @Test(description = "Complete add employee form")
-    public void completeAddEmployeeForm() throws InterruptedException{
+    @Test(description = "Complete add employee form", dataProviderClass = TestDataProvider.class, dataProvider = "customerportal")
+    public void completeAddEmployeeForm(Map<String, Object> testData) throws InterruptedException{
 
         AddEmployeePage addEmployeePage = new AddEmployeePage(getDriver());
         CustomerLoginPage customerLoginPage = new CustomerLoginPage(getDriver());
@@ -32,33 +36,38 @@ public class CustomerPortalTests extends BaseTest {
         customerPortalHomePage.tapOnAddEmployeeFromMenu();
 
         // Basic information
-        addEmployeePage.setFirstName("Harshal");
-        addEmployeePage.setLastName("Chavan");
-        addEmployeePage.setPersonalEmail("harshal@yopmail.com");
-        addEmployeePage.setGender("Male");
-        addEmployeePage.setMobileNumber(556939352);
-        addEmployeePage.setPhoto(FilePath.IMAGES_DATA_DIR+"test.jpg");
+        addEmployeePage.setFirstName(testData.get("firstName").toString());
+        addEmployeePage.setLastName(testData.get("lastName").toString());
+        addEmployeePage.setPersonalEmail(testData.get("personalEmail").toString());
+        addEmployeePage.setOfficialEmail(testData.get("officialEmail").toString());
+        addEmployeePage.setGender(testData.get("gender").toString());
+        addEmployeePage.setMobileNumber(testData.get("mobileNumber").toString());
+        addEmployeePage.setPhoto(FilePath.IMAGES_DATA_DIR+testData.get("photo").toString());
 
         // Work information
-        addEmployeePage.setEmployeeId("189861");
-        addEmployeePage.setLocation("Delhi");
-        addEmployeePage.setEmployeeType("Full Time");
-        addEmployeePage.setDepartment("Management");
-        addEmployeePage.setDesignation("Software Tester");
+        addEmployeePage.setEmployeeId(testData.get("employeeId").toString());
+        addEmployeePage.setLocation(testData.get("location").toString());
+        addEmployeePage.setEmployeeType(testData.get("employeeType").toString());
+        addEmployeePage.setDepartment(testData.get("department").toString());
+        addEmployeePage.setDesignation(testData.get("designation").toString());
 
-//        addEmployeePage.setEmployeeStatus("");
-//        addEmployeePage.setEmployeeLevel("");
-//        addEmployeePage.setCtc("");
-//        addEmployeePage.setDateOfJoining("");
-//        addEmployeePage.setSeatLocation("");
-//        addEmployeePage.setWorkExperience("");
-//        addEmployeePage.setIsReportingManager(false);
 
         //Personal Information
-        addEmployeePage.setDateOfBirth("24-July-1998");
-        addEmployeePage.setMaritalStatus("Single");
-//        addEmployeePage.setPresentAddress();
-//        addEmployeePage.setBloodGroup();
+        addEmployeePage.setDateOfBirth(testData.get("dob").toString());
+        addEmployeePage.setMaritalStatus(testData.get("maritalStatus").toString());
+        addEmployeePage.setPresentAddress(testData.get("presentAddress").toString());
+        addEmployeePage.setBloodGroup(testData.get("bloodGroup").toString());
+
+        // Education details
+        addEmployeePage.enterEducationDetails((List<Map<String, Object>>) testData.get("educationDetails"));
+
+        // Work Experience
+       addEmployeePage.enterExperienceDetails((List<Map<String, Object>>) testData.get("workExperience"));
+        // Dependents
+        addEmployeePage.enterDependentDetails((List<Map<String, Object>>) testData.get("dependants"));
+
+        // Submit Form
+        addEmployeePage.clickOnSubmitButton();
         Thread.sleep(WaitTime.VHIGH.getTimeInMillis());
     }
 

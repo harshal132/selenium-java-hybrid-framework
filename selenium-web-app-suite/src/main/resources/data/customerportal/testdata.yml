@@ -3,3 +3,59 @@ loadCustomerPortal:
     - pageTitle: Business Directory in Dubai | Local Search, Shopping, Food, Beauty Salons and More | HiDubai
     - pageTitle: Business Directory in Dubai | Local Search , Shopping, Food, Beauty Salons and More | HiDubai
   prod:
+
+completeAddEmployeeForm:
+  qa:
+    - firstName: Harshal
+      lastName: Chavan
+      personalEmail: harshal@yopmail.com
+      officialEmail: harshal@yopmail.com
+      gender: Male
+      mobileNumber: 556939352
+      photo: test.jpg
+      employeeId: 189861
+      location: Mumbai
+      employeeType: Full Time
+      department: Management
+      designation: Software Tester
+      dob: 24-July-1998
+      maritalStatus: Single
+      presentAddress: Deira
+      bloodGroup: B+
+      educationDetails:
+        - course: HSC
+          instituteName: HSC
+          marksScored: 64
+          yearOfCompletion: 2016
+        - course: SSC
+          instituteName: New English School
+          marksScored: 84.8
+          yearOfCompletion: 2014
+        - course: BScIT
+          instituteName: Mumbai University
+          marksScored: 82.4
+          yearOfCompletion: 2019
+      workExperience:
+        - previousCompany: Capgemini
+          jobTitle: Analyst
+          fromDate: 18-Jul-2019
+          toDate: 03-Mar-2022
+          description: Job description for Capgemini
+        - previousCompany: Deloitte
+          jobTitle: Consultant
+          fromDate: 07-Mar-2022
+          toDate: 14-Aug-2023
+          description: Job description for Deloitte
+      dependants:
+        - firstName: Sunita
+          lastName: Chavan
+          gender: Female
+          relationship: Mother
+          dob: 18-Oct-1967
+
+        - firstName: Sunita
+          lastName: Chavan
+          gender: Female
+          relationship: Mother
+          dob: 18-Oct-1967
+
