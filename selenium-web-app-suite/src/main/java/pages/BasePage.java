@@ -18,14 +18,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import common.constants.FilePath;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.html5.Location;
 import org.openqa.selenium.html5.LocationContext;
 import org.openqa.selenium.interactions.Actions;
@@ -46,12 +39,42 @@ public class BasePage {
         this.yaml = new DataLoader();
     }
 
-    public void loadUrl(boolean deleteCookiesFlag, String url) {
+    /**
+     * To load url with cookies
+     * @param url
+     * @param cookies
+     */
+    public void loadUrlWithCookies(String url, Cookie cookies){
+        try {
+            driver.manage().addCookie(cookies);
+            driver.get(url);
+            waitForPageToLoad();
+        } catch (Exception e) {
+            System.out.println("Exception reached: Could not load Url");
+            throw e;
+        }
+    }
+
+    public void loadUrlWithoutCookies(boolean deleteCookiesFlag, String url) {
         try {
             if (deleteCookiesFlag) {
                 driver.manage().deleteAllCookies();
                 System.out.println("Loaded url by deleting cookies: " + url);
             }
+            driver.get(url);
+            waitForPageToLoad();
+        } catch (Exception e) {
+            System.out.println("Exception reached: Could not load Url");
+            throw e;
+        }
+    }
+
+    /**
+     * load url on current page
+     * @param url
+     */
+    public void loadUrl(String url) {
+        try {
             driver.get(url);
             waitForPageToLoad();
         } catch (Exception e) {

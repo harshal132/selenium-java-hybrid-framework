@@ -8,10 +8,7 @@ import java.util.*;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import common.listeners.TestListener;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -28,6 +25,8 @@ import utils.ExtentTestManager;
 public class BaseTest {
     protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
     public static Environment testEnvType;
+
+    public static Cookie cookies;
     public static Browser browserName;
     public static DriverType driverType;
     public static boolean disableBrowserLocation=false;

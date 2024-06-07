@@ -18,9 +18,9 @@ public class LoginScreen extends BasePage {
 
     public void openLoginScreen(){
         if(BaseTest.isProdTest()){
-            loadUrl(true,DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.prod"));
+            loadUrl(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.prod"));
         }else{
-            loadUrl(true,DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.qa"));
+            loadUrl(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH,"baseUrl.qa"));
         }
         BaseTest.logTestStep("Login page loaded");
     }
