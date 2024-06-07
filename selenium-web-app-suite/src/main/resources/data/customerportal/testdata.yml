@@ -8,8 +8,8 @@ completeAddEmployeeForm:
   qa:
     - firstName: Harshal
       lastName: Chavan
-      personalEmail: harshal@yopmail.com
-      officialEmail: harshal@yopmail.com
+      personalEmail: harshal%s@yopmail.com
+      officialEmail: harshal%s@yopmail.com
       gender: Male
       mobileNumber: 556939352
       photo: test.jpg
