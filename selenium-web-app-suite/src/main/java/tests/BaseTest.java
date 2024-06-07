@@ -11,10 +11,7 @@ import com.aventstack.extentreports.Status;
 import common.constants.*;
 import common.listeners.SoftAssertListener;
 import common.listeners.TestListener;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -29,6 +26,8 @@ public class BaseTest {
     public SoftAssertListener softassert;
     protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
     public static Environment testEnvType;
+    public static Cookie cookies;
+    protected static ThreadLocal<Cookie> threadLocalCookie = new ThreadLocal<>();
     public static Browser browserName;
     public static DriverType driverType;
     public static boolean disableBrowserLocation=false;
@@ -61,8 +60,20 @@ public class BaseTest {
         threadLocalDriver.set(driver);
     }
 
+    public static void setCookies(Cookie cookie){
+        setCookie(cookie);
+    }
+
+    private static void setCookie(Cookie cookie) {
+        threadLocalCookie.set(cookie);
+    }
+
     public static WebDriver getDriver() {
         return threadLocalDriver.get();
+    }
+
+    public static Cookie getCookie() {
+        return threadLocalCookie.get();
     }
 
     public static void removeDriver() {

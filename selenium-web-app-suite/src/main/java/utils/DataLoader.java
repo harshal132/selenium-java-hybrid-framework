@@ -78,7 +78,6 @@ public class DataLoader {
         if(locatorValue.contains("|")){
             locatorsSplitArray = locatorValue.split("\\|");
             for(String oneLocator: locatorsSplitArray){
-                System.out.println("One locator value:"+oneLocator);
                 if(oneLocator.equals("|")){
                     continue;
                 }
@@ -93,11 +92,9 @@ public class DataLoader {
                 }
             }
         }else{
-            System.out.println("Entered else block");
             for(int i=0;i<replacement.length;i++){
-                locatorValue = locatorValue.replaceFirst("\\$\\{text\\}",replacement[i]);
+                finalLocatorString = locatorValue.replaceFirst("\\$\\{text\\}",replacement[i]);
             }
-            return locatorValue;
         }
         return finalLocatorString;
     }
