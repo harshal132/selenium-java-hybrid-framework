@@ -1,10 +1,6 @@
 package pages;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -17,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import common.constants.FilePath;
 import org.openqa.selenium.*;
 import org.openqa.selenium.html5.Location;
 import org.openqa.selenium.html5.LocationContext;
@@ -33,6 +28,10 @@ public class BasePage {
     protected WebDriver driver;
     protected DataLoader yaml;
 
+    /**
+     *
+     * @param driver
+     */
     public BasePage(WebDriver driver) {
         System.out.println("Driver object: "+driver);
         this.driver = driver;
@@ -98,7 +97,7 @@ public class BasePage {
         try {
             driver.navigate().back();
             waitForPageToLoad();
-            System.out.println("Naviagted to back page ");
+            System.out.println("Navigated to back page ");
         } catch (Exception e) {
             System.out.println("Exception reached: Could not navigate to back page");
             throw e;
@@ -218,9 +217,9 @@ public class BasePage {
                 element.sendKeys(Character.toString((char) ch));
                 hardWait(500);
             });
-            // // logger.debug("Text entered on element char by char: " + text);
+            System.out.println("Text entered on element char by char: " + text);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not enter text char by char", e);
+            System.out.println("Exception reached: Could not enter text char by char"+ e.getMessage());
             throw e;
         }
     }
@@ -233,9 +232,9 @@ public class BasePage {
         String text = "";
         try {
             text = element.getText();
-            // // logger.debug("Element text returned: " + text);
+            System.out.println("Element text returned: " + text);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get text by element", e);
+            System.out.println("Exception reached: Could not get text by element"+ e);
         }
         return text;
     }
@@ -247,9 +246,9 @@ public class BasePage {
     protected void click(WebElement element) {
         try {
             element.click();
-            // // logger.debug("Clicked on element");
+            System.out.println("Clicked on element");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not click by element", e);
+            System.out.println("Exception reached: Could not click by element"+ e);
             throw e;
         }
     }
@@ -263,7 +262,7 @@ public class BasePage {
         try {
             element.getTagName();
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get tagName", e);
+            System.out.println("Exception reached: Could not get tagName"+ e);
             throw e;
         }
 
@@ -282,7 +281,7 @@ public class BasePage {
                 result = true;
             }
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not verify attribute's presence ", e);
+            System.out.println("Exception reached: Could not verify attribute's presence "+ e);
             throw e;
         }
         return result;
@@ -296,9 +295,9 @@ public class BasePage {
         String text = "";
         try {
             text = element.getAttribute(attributeName);
-            // // logger.debug("Got attribute: " + attributeName + " value: " + text);
+            System.out.println("Got attribute: " + attributeName + " value: " + text);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get attribute", e);
+            System.out.println("Exception reached: Could not get attribute"+ e);
             throw e;
         }
         return text;
@@ -308,9 +307,9 @@ public class BasePage {
         int count = -1;
         try {
             count = getElements(locator).size();
-            // // logger.debug("Got number of elments count: " + count);
+            System.out.println("Got number of elments count: " + count);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get elements count", e);
+            System.out.println("Exception reached: Could not get elements count"+ e);
             throw e;
         }
         return count;
@@ -320,17 +319,17 @@ public class BasePage {
         try {
             if (getElementsCount(locator) > 0) {
                 boolean isDisplayed = getElement(locator).isDisplayed();
-                // // logger.debug("Got isDisplayed value as: " + isDisplayed);
+                System.out.println("Got isDisplayed value as: " + isDisplayed);
                 return !(shouldBeDisplayed ^ isDisplayed);
             } else {
-                // // logger.debug("Got element count value as equal to 0");
+                System.out.println("Got element count value as equal to 0");
                 if (!shouldBeDisplayed)
                     return true;
                 else
                     return false;
             }
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get element is displayed status", e);
+            System.out.println("Exception reached: Could not get element is displayed status"+ e);
             throw e;
 
         }
@@ -339,10 +338,10 @@ public class BasePage {
     protected boolean isDisplayedIfElementOnDom(boolean shouldBeDisplayed, WebElement element) {
         try {
             boolean isDisplayed = element.isDisplayed();
-            // // logger.debug("Got isDisplayed value as: " + isDisplayed);
+            System.out.println("Got isDisplayed value as: " + isDisplayed);
             return !(shouldBeDisplayed ^ isDisplayed);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get element is displayed status", e);
+            System.out.println("Exception reached: Could not get element is displayed status"+ e);
             throw e;
 
         }
@@ -352,17 +351,17 @@ public class BasePage {
         try {
             if (getElementsCount(locator) > 0) {
                 boolean isSelected = getElement(locator).isSelected();
-                // // logger.debug("Got isSelected value as: " + isSelected);
+                System.out.println("Got isSelected value as: " + isSelected);
                 return !(shouldBeSelected ^ isSelected);
             } else {
-                // // logger.debug("Got element count value as equal to 0");
+                System.out.println("Got element count value as equal to 0");
                 if (!shouldBeSelected)
                     return true;
                 else
                     return false;
             }
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get element is selected status", e);
+            System.out.println("Exception reached: Could not get element is selected status"+ e);
             throw e;
 
         }
@@ -372,7 +371,7 @@ public class BasePage {
         try {
             Thread.sleep(timeInMilliSeconds);
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not add hardwait", e);
+            System.out.println("Exception reached: Could not add hardwait"+ e);
         }
     }
 
@@ -381,9 +380,9 @@ public class BasePage {
         try {
             element = new WebDriverWait(driver, Duration.ofMillis(timeInMilliSeconds))
                     .until(ExpectedConditions.elementToBeClickable(locator));
-            // // logger.debug("Waited for element to be clickable");
+            System.out.println("Waited for element to be clickable");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not wait for element to be clickable", e);
+            System.out.println("Exception reached: Could not wait for element to be clickable"+ e);
             throw e;
         }
         return element;
@@ -393,9 +392,9 @@ public class BasePage {
         try {
             element = new WebDriverWait(driver, Duration.ofMillis(timeInMilliSeconds))
                     .until(ExpectedConditions.elementToBeClickable(element));
-            // // logger.debug("Waited for element to be clickable");
+            System.out.println("Waited for element to be clickable");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not wait for element to be clickable", e);
+            System.out.println("Exception reached: Could not wait for element to be clickable"+ e);
             throw e;
         }
         return element;
@@ -408,7 +407,7 @@ public class BasePage {
                     .pollingEvery(Duration.ofMillis(500)).ignoring(TimeoutException.class)
                     .until(ExpectedConditions.visibilityOfElementLocated(locator));
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not wait for element to be visible", e);
+            System.out.println("Exception reached: Could not wait for element to be visible"+ e);
             throw e;
         }
         return element;
@@ -419,7 +418,7 @@ public class BasePage {
         try {
             elements = new WebDriverWait(driver, Duration.ofMillis(timeInMilliSeconds))
                     .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-            // // logger.debug("Waited for element to be clickable");
+            System.out.println("Waited for element to be clickable");
         } catch (TimeoutException e) {
             if(getElements(locator).size() == 0)
                 System.out.println("Timeout Exception reached: Could not wait for element to be visible");
@@ -437,7 +436,7 @@ public class BasePage {
                     .pollingEvery(Duration.ofMillis(200)).ignoring(TimeoutException.class)
                     .until(ExpectedConditions.invisibilityOfElementLocated(locator));
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not wait for element to be invisible", e);
+            System.out.println("Exception reached: Could not wait for element to be invisible"+ e);
             throw e;
         }
         return elementInvisible;
@@ -451,7 +450,7 @@ public class BasePage {
                     .ignoring(TimeoutException.class)
                     .until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(locator)));
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not wait for element to be unstale", e);
+            System.out.println("Exception reached: Could not wait for element to be unstale"+ e);
             throw e;
         }
         return element;
@@ -464,18 +463,18 @@ public class BasePage {
                 return String.valueOf(((JavascriptExecutor) driver).executeScript("return document.readyState"))
                         .equals("complete");
             });
-            // // logger.debug("Waited for page to load");
+            System.out.println("Waited for page to load");
         } catch (Exception e) {
-            // logger.warn("Exception reached: Could not wait for page to be loaded", e);
+            System.out.println("Exception reached: Could not wait for page to be loaded"+ e);
         }
     }
 
     protected void hoverOnElement(WebElement element) {
         try {
             new Actions(driver).moveToElement(element).build().perform();
-            // // logger.debug("hovered on element");
+            System.out.println("hovered on element");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not hover on element", e);
+            System.out.println("Exception reached: Could not hover on element"+ e);
             throw e;
         }
     }
@@ -488,9 +487,9 @@ public class BasePage {
         try {
             WebElement element = getElement(locator);
             new Actions(driver).moveToElement(element).perform();
-            // // logger.debug("Scrolled to element");
+            System.out.println("Scrolled to element");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not scroll to element by actions class", e);
+            System.out.println("Exception reached: Could not scroll to element by actions class"+ e);
             throw e;
         }
     }
@@ -505,9 +504,9 @@ public class BasePage {
                     .dragAndDrop(sourceElement, destinationElement)
                     .perform();
 
-            // // logger.debug("Dragged source element to destination element");
+            System.out.println("Dragged source element to destination element");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not drag source element to destination element by actions class", e);
+            System.out.println("Exception reached: Could not drag source element to destination element by actions class"+ e);
             throw e;
         }
     }
@@ -517,9 +516,9 @@ public class BasePage {
         try {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             scriptExceute = js.executeScript(script, element);
-            // // logger.debug("Executed javascript");
+            System.out.println("Executed javascript");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not execute script: " + script, e);
+            System.out.println("Exception reached: Could not execute script: " + script+ e);
             throw e;
         }
         return scriptExceute;
@@ -530,9 +529,9 @@ public class BasePage {
         try {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             scriptExceute = js.executeScript(script);
-            // // logger.debug("Executed javascript");
+            System.out.println("Executed javascript");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not execute script: " + script, e);
+            System.out.println("Exception reached: Could not execute script: " + script + e);
             throw e;
         }
         return scriptExceute;
@@ -548,9 +547,9 @@ public class BasePage {
         try {
             value = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].innerHTML;",
                     element);
-            // // logger.debug("Got text from elment by javascript: " + value);
+            System.out.println("Got text from elment by javascript: " + value);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get text through javascript: ", e);
+            System.out.println("Exception reached: Could not get text through javascript: "+ e);
             throw e;
         }
         return value;
@@ -565,9 +564,9 @@ public class BasePage {
         try {
             value = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].value;",
                     element);
-            // // logger.debug("Got value from elment by javascript: " + value);
+            System.out.println("Got value from elment by javascript: " + value);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get value through javascript: ", e);
+            System.out.println("Exception reached: Could not get value through javascript: "+ e);
             throw e;
         }
         return value;
@@ -582,9 +581,9 @@ public class BasePage {
         try {
             ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + value + "'",
                     element);
-            // // logger.debug("Set value for elment by javascript: " + value);
+            System.out.println("Set value for elment by javascript: " + value);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not set value through javascript: ", e);
+            System.out.println("Exception reached: Could not set value through javascript: "+ e);
             throw e;
         }
     }
@@ -598,9 +597,9 @@ public class BasePage {
         try {
             value = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].innerText;",
                     element);
-            // // logger.debug("Got text from elment by javascript: " + value);
+            System.out.println("Got text from elment by javascript: " + value);
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get text through javascript: ", e);
+            System.out.println("Exception reached: Could not get text through javascript: "+ e);
             throw e;
         }
         return value;
@@ -612,9 +611,9 @@ public class BasePage {
             String script = "document.evaluate(" + xPathExp
                     + ",document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;)";
             element = (WebElement) jsExecuteScript(script);
-            // // logger.debug("Got element from xpath by javascript");
+            System.out.println("Got element from xpath by javascript");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not get xpath element by javascript: " + xPathExp, e);
+            System.out.println("Exception reached: Could not get xpath element by javascript: " + xPathExp+ e);
             throw e;
         }
         return element;
@@ -623,9 +622,9 @@ public class BasePage {
     protected void jsClick(WebElement element) {
         try {
             jsExecuteScript("arguments[0].click();", element);
-            // // logger.debug("Clicked on element");
+            System.out.println("Clicked on element");
         } catch (Exception e) {
-            // // logger.error("Exception reached: Could not click by javascript", e);
+            System.out.println("Exception reached: Could not click by javascript"+ e);
             throw e;
         }
     }
@@ -648,18 +647,18 @@ public class BasePage {
     protected void jsScrollByPixel(int x, int y) {
         try {
             jsExecuteScript("window.scrollBy(" + x + "," + y + ")");
-            // // logger.debug("Scrolled by pixel: (" + x + "," + y + ")");
+            System.out.println("Scrolled by pixel: (" + x + "," + y + ")");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not scroll by pixel by javascript: ", e);
+            System.out.println("Exception reached: Could not scroll by pixel by javascript: "+ e);
         }
     }
 
     protected void jsScrollToElement(WebElement element) {
         try {
             jsExecuteScript("arguments[0].scrollIntoView();", element);
-            // // logger.debug("Scrolled to elemnt by javascript");
+            System.out.println("Scrolled to elemnt by javascript");
         } catch (Exception e) {
-            // // logger.warn("Exception reached: Could not scroll to element by javascript: ", e);
+            System.out.println("Exception reached: Could not scroll to element by javascript: "+ e);
         }
     }
 
@@ -678,9 +677,9 @@ public class BasePage {
     public void jsScrollToTop() {
         try {
             jsExecuteScript("window.scrollTo(0, 0)");
-            // logger.debug("Scrolled to top by javascript");
+            System.out.println("Scrolled to top by javascript");
         } catch (Exception e) {
-            // logger.warn("Exception reached: Could not scroll to top", e);
+            System.out.println("Exception reached: Could not scroll to top"+ e);
         }
     }
 
@@ -690,9 +689,9 @@ public class BasePage {
     public void jsScrollToBottom() {
         try {
             jsExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
-            // logger.debug("Scrolled to bottom by javascript");
+            System.out.println("Scrolled to bottom by javascript");
         } catch (Exception e) {
-            // logger.warn("Exception reached: Could not scroll to bottom", e);
+            System.out.println("Exception reached: Could not scroll to bottom"+ e);
         }
     }
 
@@ -700,9 +699,9 @@ public class BasePage {
         try {
             WebElement element = getElement(locator);
             jsExecuteScript("arguments[0].remove();", element);
-            // logger.debug("Removed elemnt by javascript");
+            System.out.println("Removed elemnt by javascript");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not remove iframe/element by javascript: ", e);
+            System.out.println("Exception reached: Could not remove iframe/element by javascript: "+ e);
             throw e;
         }
     }
@@ -711,9 +710,9 @@ public class BasePage {
         try {
             WebElement element = getElement(locator);
             jsExecuteScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
-            // logger.debug("Highlighted elemnt by javascript");
+            System.out.println("Highlighted elemnt by javascript");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not highlight element by javascript: ", e);
+            System.out.println("Exception reached: Could not highlight element by javascript: "+ e);
             throw e;
         }
     }
@@ -723,11 +722,11 @@ public class BasePage {
             new WebDriverWait(driver, Duration.ofMillis(8000)).until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert().accept();
         } catch (TimeoutException e) {
-            // logger.warn("Timed out, alert not present", e);
+            System.out.println("Timed out, alert not present"+ e);
         } catch (NoAlertPresentException e) {
-            // logger.warn("No Alert present", e);
+            System.out.println("No Alert present"+ e);
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not confirm on alert", e);
+            System.out.println("Exception reached: Could not confirm on alert"+ e);
             throw e;
         }
     }
@@ -737,9 +736,9 @@ public class BasePage {
             new WebDriverWait(driver, Duration.ofMillis(8000)).until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert().dismiss();;
         } catch (TimeoutException e) {
-            // logger.warn("Timed out, alert not present", e);
+            System.out.println("Timed out, alert not present"+ e);
         } catch (NoAlertPresentException e) {
-            // logger.warn("No Alert present", e);
+            System.out.println("No Alert present"+ e);
         } catch (Exception e) {
             System.out.println("Exception reached: Could not confirm on alert");
             throw e;
@@ -752,7 +751,7 @@ public class BasePage {
                     "window.navigator.geolocation.getCurrentPosition=function(success){; var position = {'coords' : {'latitude': '"
                             + latitude + "','longitude': '" + longitude + "'}}; success(position);}");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not set browser location", e);
+            System.out.println("Exception reached: Could not set browser location"+ e);
             throw e;
         }
     }
@@ -763,7 +762,7 @@ public class BasePage {
             latitude = (String) jsExecuteScript(
                     "var x='';navigator.geolocation.getCurrentPosition(function(position) {x= position.coords.latitude});return x;");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get browser location latitude", e);
+            System.out.println("Exception reached: Could not get browser location latitude"+ e);
             throw e;
         }
         return latitude;
@@ -775,7 +774,7 @@ public class BasePage {
             latitude = (String) jsExecuteScript(
                     "var y='';navigator.geolocation.getCurrentPosition(function(position) {y= position.coords.longitude});return y;");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get browser location longitude", e);
+            System.out.println("Exception reached: Could not get browser location longitude"+ e);
             throw e;
         }
         return latitude;
@@ -785,7 +784,7 @@ public class BasePage {
         try {
             return driver.getWindowHandle();
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not get window handle", e);
+            System.out.println("Exception reached: Could not get window handle"+ e.getMessage());
             throw e;
         }
     }
@@ -794,7 +793,7 @@ public class BasePage {
         try {
             return driver.getWindowHandles();
         } catch(Exception e) {
-            // logger.error("Exception reached: Could not get window handles", e);
+            System.out.println("Exception reached: Could not get window handles" +e.getMessage());
             throw e;
         }
     }
@@ -812,7 +811,7 @@ public class BasePage {
                 }
             }
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not switch to child window", e);
+            System.out.println("Exception reached: Could not switch to child window"+e.getMessage());
             throw e;
         }
     }
@@ -1015,60 +1014,6 @@ public class BasePage {
         return false;
     }
 
-    // ROBOT framework operations
-
-    public boolean uploadMediaByRobot(String fileName) {
-        final String imagesData = FilePath.IMAGES_DATA_FILE_PATH;
-
-        try {
-            //File Need to be imported
-
-            File file = new File(imagesData+fileName);
-            StringSelection stringSelection = new StringSelection(file.getAbsolutePath());
-            //Copy to clipboard
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-
-            Robot robot = new Robot();
-
-            robot.delay(3000);
-            // Cmd + Tab is needed since it launches a Java app and the browser looses focus
-            robot.keyPress(KeyEvent.VK_META);
-            robot.keyPress(KeyEvent.VK_TAB);
-            robot.keyRelease(KeyEvent.VK_META);
-            robot.keyRelease(KeyEvent.VK_TAB);
-            robot.delay(500);
-
-            //Open Goto window
-            robot.keyPress(KeyEvent.VK_META);
-            robot.keyPress(KeyEvent.VK_SHIFT);
-            robot.keyPress(KeyEvent.VK_G);
-            robot.keyRelease(KeyEvent.VK_META);
-            robot.keyRelease(KeyEvent.VK_SHIFT);
-            robot.keyRelease(KeyEvent.VK_G);
-            robot.delay(5000);
-            //Paste the clipboard value
-            robot.keyPress(KeyEvent.VK_META);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_META);
-            robot.keyRelease(KeyEvent.VK_V);
-
-            //Press Enter key to close the Goto window and Upload window
-            robot.delay(5000);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-            robot.delay(3000);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-
-            System.out.println("Uploaded media with path : " + imagesData+fileName);
-            return true;
-
-        } catch (Exception e) {
-            System.out.println("Failed to upload media with path : " + imagesData+fileName + " due to exception - " + e.getMessage());
-            return false;
-        }
-    }
-
     // Relative Locators functions
     protected WebElement getElementAboveOf(By baseLocator, By relativeLocator) {
         WebElement element = null;
@@ -1076,7 +1021,7 @@ public class BasePage {
             element = driver.findElement(with(relativeLocator).above(baseLocator));
             System.out.println("WebElement found above");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element above using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element above using relative locator "+ e);
         }
         return element;
     }
@@ -1087,7 +1032,7 @@ public class BasePage {
             element = driver.findElement(with(relativeLocator).below(baseLocator));
             System.out.println("WebElement found below");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element below using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element below using relative locator "+ e);
         }
         return element;
     }
@@ -1098,7 +1043,7 @@ public class BasePage {
             element = driver.findElement(with(relativeLocator).toLeftOf(baseLocator));
             System.out.println("WebElement found to the left");
         } catch (Exception e) {
-            // logger.error("Exception reached: Could not get Element to the left using relative locator ", e);
+            System.out.println("Exception reached: Could not get Element to the left using relative locator "+ e);
         }
         return element;
     }

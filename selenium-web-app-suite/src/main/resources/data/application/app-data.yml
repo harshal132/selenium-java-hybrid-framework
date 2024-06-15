@@ -1,12 +1,7 @@
 implicitTimeOut: 3000
 
-waitTime:
-  small: 2000
-  medium: 5000
-  high: 8000
-
-disableBrowserLocationTestCases: SeleniumTestTwo, SeleniumTestThree
-testSuiteReportName: Test Suite Execution Report
+disableBrowserLocationTestCases: TestMethodName
+testSuiteReportName: Test Execution Report.html
 
 baseUrl:
   qa: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login

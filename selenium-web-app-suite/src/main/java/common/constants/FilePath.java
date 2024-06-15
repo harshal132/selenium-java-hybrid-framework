@@ -3,32 +3,25 @@ package common.constants;
 import java.io.File;
 
 public class FilePath {
-
-
-    //////////////////////////// REAL PATH FOR MY TEST FRAMEWORK ////////////////////////////
-
-
     // Resources
-    private static final String REAL_RESOURCES_PATH = System.getProperty("user.dir") + File.separator + "src"
+    private static final String RESOURCES_PATH = System.getProperty("user.dir") + File.separator + "src"
             + File.separator + "main" + File.separator + "resources" + File.separator;
     // Directory
-    public static final String REAL_DATA_FILE_PATH = REAL_RESOURCES_PATH + "data" + File.separator;
-    public static final String REAL_REPORTS_FILE_PATH = REAL_RESOURCES_PATH + "reports" + File.separator;
-    public static final String REAL_TEST_SCREENSHOT_DIR = REAL_REPORTS_FILE_PATH + "screenshots" + File.separator;
-    public static final String IMAGES_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "images";
+    public static final String DATA_DIR_PATH = RESOURCES_PATH + "data" + File.separator;
+    public static final String REPORTS_DIR_PATH = RESOURCES_PATH + "reports" + File.separator;
+    public static final String TEST_SCREENSHOT_DIR = REPORTS_DIR_PATH + "screenshots" + File.separator;
+    public static final String IMAGES_DATA_FILE_PATH = DATA_DIR_PATH + "images";
 
-    // Locators
-    public static final String REAL_LOCATORS = REAL_RESOURCES_PATH + "locators" + File.separator;
-    public static final String REAL_LOCATORS_MODULE_ONE = REAL_LOCATORS + "moduleone" + File.separator;
-    public static final String REAL_LOCATORS_MODULE_ONE_PAGE_ONE = REAL_LOCATORS_MODULE_ONE + "moduleonepageone.yml";
+    // Locators Files & Directories Added Here
+    public static final String LOCATORS_DIR = RESOURCES_PATH + "locators" + File.separator;
+    public static final String LOCATORS_ADMIN_PORTAL_DIR = LOCATORS_DIR + "adminportal" + File.separator;
+    public static final String LOCATORS_CUSTOMER_PORTAL_DIR = LOCATORS_DIR + "customerportal" + File.separator;
+    public static final String LOCATORS_PUBLIC_PORTAL_DIR = LOCATORS_DIR + "publicportal" + File.separator;
 
-    public static final String REAL_LOCATORS_MODULE_TWO = REAL_LOCATORS + "moduletwo" + File.separator;
-
-    public static final String REAL_LOCATORS_MODULE_TWO_LOGIN_PAGE = REAL_LOCATORS_MODULE_TWO + "loginscreen.yml";
-    // Data
-    public static final String REAL_APP_DATA_FILE_PATH = REAL_DATA_FILE_PATH + "application" + File.separator + "app-data.yml";
-    public static final String TEST_DATA_MODULE_ONE = REAL_DATA_FILE_PATH + "moduleone" + File.separator + "moduleone.yml";
-    public static final String TEST_DATA_MODULE_TWO = REAL_DATA_FILE_PATH + "moduletwo" + File.separator + "moduletwo.yml";
+    // Data Files & Directories Added Here
+    public static final String APP_DATA_FILE_PATH = DATA_DIR_PATH + "application" + File.separator + "app-data.yml";
+    public static final String TEST_DATA_MODULE_ONE = DATA_DIR_PATH + "moduleone" + File.separator + "moduleone.yml";
+    public static final String TEST_DATA_MODULE_TWO = DATA_DIR_PATH + "moduletwo" + File.separator + "moduletwo.yml";
 
     public FilePath() {
 

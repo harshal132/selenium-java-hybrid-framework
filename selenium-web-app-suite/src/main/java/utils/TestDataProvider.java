@@ -12,43 +12,26 @@ import java.util.Map;
 
 public class TestDataProvider {
     String testDataFilePath;
-    @DataProvider(name="module1")
-    public Object[][] getTestDataForModule1(Method method, ITestContext context){
+    static DataLoader dataLoader;
+
+    public TestDataProvider(){
+        dataLoader = new DataLoader();
+    }
+    @DataProvider(name="publicPortal")
+    public Object[][] getTestDataForPublicPortal(Method method, ITestContext context){
         testDataFilePath = FilePath.TEST_DATA_MODULE_ONE;
-        return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
+        return dataLoader.parseMapToArray(dataLoader.getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 
-    @DataProvider(name="module2")
-    public Object[][] getTestDataForModule2(Method method, ITestContext context){
+    @DataProvider(name="customerPortal")
+    public Object[][] getTestDataForCustomerPortal(Method method, ITestContext context){
         testDataFilePath = FilePath.TEST_DATA_MODULE_TWO;
-        return parseMapToArray(getTestDataFromYml(testDataFilePath, method.getName(),context));
+        return dataLoader.parseMapToArray(dataLoader.getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 
-    private List<Map<String, Object>> getTestDataFromYml(String testDataFilePath, String testCaseName, ITestContext context) {
-        Map<String, Object> yamlData = null;
-        String testEnvironment = context.getCurrentXmlTest().getParameter("EnvType");
-        Yaml yaml = new Yaml();
-        try (FileReader reader = new FileReader(testDataFilePath)) {
-            yamlData = yaml.load(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(testEnvironment!=null && testEnvironment.equals("prod")){
-            yamlData = (Map<String, Object>) yamlData.get(testCaseName);
-            return (List<Map<String, Object>>) yamlData.get("prod");
-        }
-        else{
-            yamlData = (Map<String, Object>) yamlData.get(testCaseName);
-            return (List<Map<String, Object>>) yamlData.get("qa");
-        }
-    }
-
-    public static Object[][] parseMapToArray(List<Map<String, Object>> interimResults) {
-        Object[][] results = new Object[interimResults.size()][1];
-        int index = 0;
-        for (Map<String, Object> interimResult : interimResults) {
-            results[index++] = new Object[] {interimResult};
-        }
-        return results;
+    @DataProvider(name="adminPortal")
+    public Object[][] getTestDataForAdminPortal(Method method, ITestContext context){
+        testDataFilePath = FilePath.TEST_DATA_MODULE_TWO;
+        return dataLoader.parseMapToArray(dataLoader.getTestDataFromYml(testDataFilePath, method.getName(),context));
     }
 }
