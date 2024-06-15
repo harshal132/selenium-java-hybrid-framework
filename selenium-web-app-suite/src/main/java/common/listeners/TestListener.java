@@ -69,7 +69,7 @@ public class TestListener extends BaseTest implements ITestListener {
         try {
             final String testMethodName = result.getName();
             final String screenShotName = testMethodName + ".png";
-            final String screenshotsDirectoryPath = FilePath.REAL_TEST_SCREENSHOT_DIR;
+            final String screenshotsDirectoryPath = FilePath.TEST_SCREENSHOT_DIR;
 
             File targetFileDir = new File(screenshotsDirectoryPath);
             if (!targetFileDir.exists()) {

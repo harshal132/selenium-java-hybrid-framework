@@ -1,11 +1,6 @@
 implicitTimeOut: 3000
 
-waitTime:
-  small: 2000
-  medium: 5000
-  high: 8000
-
-disableBrowserLocationTestCases: SeleniumTestTwo, SeleniumTestThree
+disableBrowserLocationTestCases: TestMethodName
 testSuiteReportName: Test Suite Execution Report
 
 baseUrl:

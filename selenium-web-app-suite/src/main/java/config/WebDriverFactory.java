@@ -74,7 +74,7 @@ public class WebDriverFactory {
             throw new RuntimeException("Browser name is null");
         driver.manage().window().maximize();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(Integer.parseInt(Objects.requireNonNull(DataLoader.getCommonData(FilePath.REAL_APP_DATA_FILE_PATH, "implicitTimeOut")))));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(Integer.parseInt(Objects.requireNonNull(DataLoader.getCommonData(FilePath.APP_DATA_FILE_PATH, "implicitTimeOut")))));
         return driver;
     }
 

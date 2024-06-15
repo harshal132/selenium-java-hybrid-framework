@@ -1,8 +1,6 @@
 package utils;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Protocol;
@@ -21,8 +19,8 @@ public class ExtentManager {
     }
 
     public static ExtentReports createInstance() {
-        String fileName = getReportPath(FilePath.REAL_REPORTS_FILE_PATH);
-        String reportName = getCommonData(FilePath.REAL_APP_DATA_FILE_PATH,"testSuiteReportName");
+        String fileName = getReportPath(FilePath.REPORTS_DIR_PATH);
+        String reportName = getCommonData(FilePath.APP_DATA_FILE_PATH,"testSuiteReportName");
         ExtentSparkReporter reporter = new ExtentSparkReporter(fileName);
         reporter.config().setTheme(Theme.DARK);
         reporter.config().setDocumentTitle(reportName);
@@ -37,15 +35,35 @@ public class ExtentManager {
         return extentReport;
     }
 
-    private static String getReportPath(String path) {
-        String reportFileLocation = null;
-        Date now = new Date();
-        String format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH).format(now);
+    /**
+     * Generates new reports in separate directory without deleting old reports
+     */
+//    private static String getReportPath(String path) {
+//        String reportFileLocation = null;
+//        Date now = new Date();
+//        String format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH).format(now);
+//
+//        reportFileLocation = path + File.separator + format1 + File.separator + getCommonData(FilePath.REAL_APP_DATA_FILE_PATH,"testSuiteReportName");
+//        File reportsDirectory = new File(reportFileLocation);
+//        if (!reportsDirectory.exists()) {
+//            if (reportsDirectory.mkdir()) {
+//                return reportFileLocation;
+//            }
+//        }
+//        return reportFileLocation;
+//    }
 
-        reportFileLocation = path + File.separator + format1 + File.separator + getCommonData(FilePath.REAL_APP_DATA_FILE_PATH,"testSuiteReportName");
-        File reportsDirectory = new File(reportFileLocation);
-        if (!reportsDirectory.exists()) {
-            if (reportsDirectory.mkdir()) {
+    /**
+     * Overwrite data in reports directory with updated test report
+     * @param path
+     * @return String
+     */
+    private static String getReportPath(String path) {
+        String reportName = DataLoader.getCommonData(FilePath.APP_DATA_FILE_PATH, "testSuiteReportName");
+        String reportFileLocation = FilePath.REPORTS_DIR_PATH + File.separator + reportName;
+        File testDirectory = new File(path);
+        if (!testDirectory.exists()) {
+            if (testDirectory.mkdir()) {
                 return reportFileLocation;
             }
         }

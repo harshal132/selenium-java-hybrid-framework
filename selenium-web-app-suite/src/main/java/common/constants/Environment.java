@@ -1,7 +1,6 @@
 package common.constants;
 
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
