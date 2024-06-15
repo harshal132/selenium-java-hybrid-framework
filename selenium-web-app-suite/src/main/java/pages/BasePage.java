@@ -43,9 +43,11 @@ public class BasePage {
      * @param url
      * @param cookies
      */
-    public void loadUrlWithCookies(String url, Cookie cookies){
+    public void loadUrlWithCookies(String url, Set<Cookie> cookies){
         try {
-            driver.manage().addCookie(cookies);
+            for(Cookie cookie: cookies){
+                driver.manage().addCookie(cookie);
+            }
             driver.get(url);
             waitForPageToLoad();
         } catch (Exception e) {
