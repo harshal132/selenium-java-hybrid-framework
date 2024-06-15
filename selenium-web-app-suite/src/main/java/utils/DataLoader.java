@@ -1,11 +1,11 @@
 package utils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openqa.selenium.By;
+import org.testng.ITestContext;
 import org.yaml.snakeyaml.Yaml;
 import tests.BaseTest;
 
@@ -24,9 +24,15 @@ public class DataLoader {
         return (Map<String, Object>) obj.get(locatorName);
     }
 
-    public static String getAppData(String filePath, String keyName) {
+    /**
+     * To get app data by passing json path
+     * @param filePath
+     * @param keyName
+     * @return
+     */
+    public static String getCommonData(String filePath, String keyName) {
         Yaml yaml = new Yaml();
-        InputStream inputStream = null;
+        InputStream inputStream;
         Map<String, Object> obj = null;
         try {
             inputStream = new FileInputStream(filePath);
@@ -42,6 +48,12 @@ public class DataLoader {
         }
     }
 
+    /**
+     * Extract data by json path key
+     * @param yamlData
+     * @param keyName
+     * @return
+     */
     private static String getValueByKey(Map<String, Object> yamlData, String keyName) {
         String[] keys = keyName.split("\\.");
         Map<String, Object> currentMap = yamlData;
@@ -56,19 +68,19 @@ public class DataLoader {
         return null; // Key not found
     }
 
-    public Map<String, String> getTestData(String testName, String filePath, String keyName) {
-        Yaml yaml = new Yaml();
-        InputStream inputStream = null;
-        Map<String, HashMap<String, String>> obj = null;
-        try {
-            inputStream = new FileInputStream(filePath);
-            obj = yaml.<Map<String, HashMap<String, String>>>load(inputStream);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return obj.get(keyName);
-    }
+//    public Map<String, String> getTestData(String filePath, String keyName) {
+//        Yaml yaml = new Yaml();
+//        InputStream inputStream = null;
+//        Map<String, HashMap<String, String>> obj = null;
+//        try {
+//            inputStream = new FileInputStream(filePath);
+//            obj = yaml.<Map<String, HashMap<String, String>>>load(inputStream);
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return obj.get(keyName);
+//    }
 
     private static String getValueAfterReplacement(String locatorValue, String... replacement) {
         String finalLocatorString = "";
@@ -115,7 +127,6 @@ public class DataLoader {
             else
                 value = locatorMap.get("value").toString();
         }
-
         return getLocatorType(locatorMap.get("locatorType").toString(), value);
     }
 
@@ -152,6 +163,34 @@ public class DataLoader {
             default -> By.xpath(locatorValue);
         };
         return locator;
+    }
+
+    public List<Map<String, Object>> getTestDataFromYml(String testDataFilePath, String testCaseName, ITestContext context) {
+        Map<String, Object> yamlData = null;
+        String testEnvironment = context.getCurrentXmlTest().getParameter("EnvType");
+        Yaml yaml = new Yaml();
+        try (FileReader reader = new FileReader(testDataFilePath)) {
+            yamlData = yaml.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(testEnvironment!=null && testEnvironment.equals("prod")){
+            yamlData = (Map<String, Object>) yamlData.get(testCaseName);
+            return (List<Map<String, Object>>) yamlData.get("prod");
+        }
+        else{
+            yamlData = (Map<String, Object>) yamlData.get(testCaseName);
+            return (List<Map<String, Object>>) yamlData.get("qa");
+        }
+    }
+
+    public static Object[][] parseMapToArray(List<Map<String, Object>> interimResults) {
+        Object[][] results = new Object[interimResults.size()][1];
+        int index = 0;
+        for (Map<String, Object> interimResult : interimResults) {
+            results[index++] = new Object[] {interimResult};
+        }
+        return results;
     }
 
 }

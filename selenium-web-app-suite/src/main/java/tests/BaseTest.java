@@ -39,7 +39,7 @@ public class BaseTest {
         driverType = DriverType.get(testDriverType);
         System.out.println("Suite running on environment: " + EnvType);
         System.out.println("Suite running on driver type: " + testDriverType);
-        disableBrowserLocationTestCases = Arrays.asList(Objects.requireNonNull(DataLoader.getAppData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases")).split(","));
+        disableBrowserLocationTestCases = Arrays.asList(Objects.requireNonNull(DataLoader.getCommonData(FilePath.REAL_APP_DATA_FILE_PATH, "disableBrowserLocationTestCases")).split(","));
     }
 
     @Parameters({ "Browser" })
