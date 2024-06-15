@@ -26,9 +26,6 @@ public class TestOne extends BaseTest {
         String fbTitle = fbDriver.getTitle();
 
         System.out.println(fbDriver.manage().getCookies());
-
-        fbDriver.findElement(By.id("email")).sendKeys("harshalchavan132@gmail.com");
-        fbDriver.findElement(By.id("pass")).sendKeys("Harshal7506@98");
         //login
         fbDriver.findElement(By.name("login")).click();
         Thread.sleep(4500);
