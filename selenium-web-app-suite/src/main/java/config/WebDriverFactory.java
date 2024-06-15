@@ -17,7 +17,6 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import tests.BaseTest;
 import utils.DataLoader;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -26,8 +25,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class WebDriverFactory {
-    //public static Logger logger = Logger.getLogger(WebDriverFactory.class);
-
     /**
      * return driver instance as per browser
      *
@@ -102,7 +99,6 @@ public class WebDriverFactory {
      * @return chromeOptions
      */
     private static ChromeOptions getChromeOptions() {
-        //WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("-headed");
         chromeOptions.addArguments("--remote-allow-origins=*");
@@ -111,9 +107,9 @@ public class WebDriverFactory {
 
         Map<String, Object> prefs = new HashMap<String, Object>();
         if(BaseTest.disableBrowserLocation)
-            prefs.put("profile.default_content_setting_values.geolocation", 2); // 1:allow 2:block
-        else
             prefs.put("profile.default_content_setting_values.geolocation", 1); // 1:allow 2:block
+        else
+            prefs.put("profile.default_content_setting_values.geolocation", 2); // 1:allow 2:block
 
         chromeOptions.setExperimentalOption("prefs", prefs);
         return chromeOptions;
@@ -121,7 +117,6 @@ public class WebDriverFactory {
     }
 
     private static FirefoxOptions getFirefoxOptions() {
-        //WebDriverManager.firefoxdriver().setup();
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("-headed");
         firefoxOptions.addPreference("dom.webnotifications.enabled", false);
@@ -142,7 +137,6 @@ public class WebDriverFactory {
     }
 
     private static ChromeOptions getAndroidEmulatorChromeOptions() {
-        //WebDriverManager.chromedriver().setup();
         ChromeOptions androidEmulatorChromeOptions = new ChromeOptions();
         androidEmulatorChromeOptions.addArguments("-headed");
         androidEmulatorChromeOptions.addArguments("--remote-allow-origins=*");
@@ -153,9 +147,9 @@ public class WebDriverFactory {
 
         Map<String, Object> prefs = new HashMap<String, Object>();
         if(BaseTest.disableBrowserLocation)
-            prefs.put("profile.default_content_setting_values.geolocation", 2); // 1:allow 2:block
-        else
             prefs.put("profile.default_content_setting_values.geolocation", 1); // 1:allow 2:block
+        else
+            prefs.put("profile.default_content_setting_values.geolocation", 2); // 1:allow 2:block
 
         androidEmulatorChromeOptions.setExperimentalOption("mobileEmulation", androidEmulation);
         androidEmulatorChromeOptions.setExperimentalOption("prefs", prefs);
@@ -163,7 +157,6 @@ public class WebDriverFactory {
     }
 
     private static ChromeOptions getIphoneEmulatorChromeOptions() {
-        //WebDriverManager.chromedriver().setup();
         HashMap<String, String> iphoneEmulation = new HashMap<String, String>();
         iphoneEmulation.put("deviceName", "iPhone X");
         ChromeOptions iphoneEmulatorChromeOptions = new ChromeOptions();

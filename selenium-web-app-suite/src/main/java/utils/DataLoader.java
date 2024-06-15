@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
 import org.openqa.selenium.By;
 import org.yaml.snakeyaml.Yaml;
 import tests.BaseTest;
@@ -94,6 +92,7 @@ public class DataLoader {
         }else{
             for(int i=0;i<replacement.length;i++){
                 finalLocatorString = locatorValue.replaceFirst("\\$\\{text\\}",replacement[i]);
+                locatorValue = finalLocatorString;
             }
         }
         return finalLocatorString;
