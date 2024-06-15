@@ -1,5 +1,8 @@
 package utils;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -43,7 +46,7 @@ public class ExtentManager {
 //        Date now = new Date();
 //        String format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH).format(now);
 //
-//        reportFileLocation = path + File.separator + format1 + File.separator + getCommonData(FilePath.REAL_APP_DATA_FILE_PATH,"testSuiteReportName");
+//        reportFileLocation = path + format1 + File.separator + getCommonData(FilePath.APP_DATA_FILE_PATH,"testSuiteReportName");
 //        File reportsDirectory = new File(reportFileLocation);
 //        if (!reportsDirectory.exists()) {
 //            if (reportsDirectory.mkdir()) {
@@ -54,16 +57,15 @@ public class ExtentManager {
 //    }
 
     /**
-     * Overwrite data in reports directory with updated test report
+     * Overwrite single report
      * @param path
-     * @return String
+     * @return
      */
     private static String getReportPath(String path) {
-        String reportName = DataLoader.getCommonData(FilePath.APP_DATA_FILE_PATH, "testSuiteReportName");
-        String reportFileLocation = FilePath.REPORTS_DIR_PATH + File.separator + reportName;
-        File testDirectory = new File(path);
-        if (!testDirectory.exists()) {
-            if (testDirectory.mkdir()) {
+        String reportFileLocation = path + getCommonData(FilePath.APP_DATA_FILE_PATH,"testSuiteReportName");
+        File reportsDirectory = new File(path);
+        if (!reportsDirectory.exists()) {
+            if (reportsDirectory.mkdir()) {
                 return reportFileLocation;
             }
         }

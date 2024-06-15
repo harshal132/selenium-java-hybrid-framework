@@ -1,7 +1,7 @@
 implicitTimeOut: 3000
 
 disableBrowserLocationTestCases: TestMethodName
-testSuiteReportName: Test Suite Execution Report
+testSuiteReportName: Test Execution Report.html
 
 baseUrl:
   qa: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login

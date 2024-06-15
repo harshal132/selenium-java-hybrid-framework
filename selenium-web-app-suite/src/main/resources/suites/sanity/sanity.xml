@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite thread-count="6" name="Suite" parallel="false">
+<suite thread-count="6" name="Suite" parallel="">
     <groups>
         <run>
-            <include name="regression" />
+            <include name="sanity" />
         </run>
     </groups>
     <parameter name="EnvType" value="qa" />
@@ -11,14 +11,7 @@
     <test name="Regression Tests - Chrome">
         <parameter name="Browser" value="chrome" />
         <classes>
-            <class name="tests.customerportal.TestOne"></class>
+<!--            <class name="tests.moduleone.SeleniumTestOne"></class>-->
         </classes>
-    </test>
-
-    <test name="Regression Tests - Android Chrome">
-        <parameter name="Browser" value="android_chrome" />
-        <classes>
-            <class name="tests.customerportal.TestOne"></class>
-        </classes>
-    </test>
+    </test> <!-- Test -->
 </suite> <!-- Suite -->
